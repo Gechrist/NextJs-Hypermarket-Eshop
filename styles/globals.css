@@ -1,16 +1,60 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-body;
+    @apply bg-gray-900;
+    @apply text-white;
+    @apply text-xs;
+    @apply xl:text-base;
+    @apply 2xl:text-xl;
+  }
+  body {
+    @apply overflow-x-hidden;
+  }
+  h1 {
+    @apply text-4xl;
+    @apply font-title;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  span {
+    @apply text-red-700;
+  }
+  button {
+    @apply w-auto p-2 border-2 border-black rounded bg-indigo-600 text-white ring-white hover:text-black active:bg-indigo-500 focus:text-black;
+  }
+  th {
+    @apply cursor-pointer active:bg-green-300;
+  }
+  td {
+    @apply lg:py-2 lg:px-4;
+  }
+  label {
+    @apply text-black;
+  }
+  @font-face {
+    font-family: Lightsider;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../public/fonts/LightsiderTitle-ORY6.otf') format('truetype');
+  }
+  @font-face {
+    font-family: IstokWeb;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../public/fonts/IstokWeb-Regular.ttf') format('truetype');
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+@layer components {
+  .link {
+    @apply hover:text-yellow-400 cursor-pointer;
+  }
 }

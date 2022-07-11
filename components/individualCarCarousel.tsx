@@ -1,0 +1,79 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import { PrevButton, NextButton } from '../utils/emblaCarouselButtons';
+import useEmblaCarousel from 'embla-carousel-react';
+import ImageModal from '../components/fullImageModal';
+
+const EmblaCarousel = ({ sections, car }: any) => {
+  const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState<boolean>(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState<boolean>(false);
+  const [modalSRC, setModalSRC] = useState<string>('');
+  const [modalCar, setModalCar] = useState<string>('');
+  const [modalIsOpen, setIsOpen] = useState<boolean>();
+
+  const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
+  const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
+
+  const onSelect = useCallback(() => {
+    if (!embla) return;
+    setPrevBtnEnabled(embla.canScrollPrev());
+    setNextBtnEnabled(embla.canScrollNext());
+  }, [embla]);
+
+  useEffect(() => {
+    if (!embla) return;
+    onSelect();
+    embla.on('select', onSelect);
+  }, [embla, onSelect]);
+
+  //modal functions
+  const openModal = (src: string, car: string) => {
+    setModalSRC(src);
+    setModalCar(car);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      {modalIsOpen && (
+        <ImageModal src={modalSRC} car={modalCar} closeModal={closeModal} />
+      )}
+      <div className="embla overflow-hidden flex flex-col space-y-2">
+        <div className="embla__viewport" ref={viewportRef}>
+          <div className="embla__container flex">
+            {sections.map((item: any, index: number) => (
+              <div
+                className="embla__slide min-w-full relative grow-0 shrink-0 basis-full"
+                key={index}
+              >
+                <div
+                  className="w-72 h-72 cursor-pointer"
+                  onClick={() => openModal(item, car)}
+                >
+                  <Image
+                    src={item}
+                    alt={`${car} image`}
+                    aria-label={`${car} image`}
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-row justify-center space-x-2 z-30 px-2">
+          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+          <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default EmblaCarousel;
