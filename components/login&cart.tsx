@@ -26,9 +26,7 @@ const Login = () => {
   }, [router.pathname]);
 
   useEffect(() => {
-    setCartItemsNumber(
-      (cartItemsNumber) => (cartItemsNumber = state.orderItems.length)
-    );
+    setCartItemsNumber(state.orderItems.length);
   }, [state.orderItems]);
 
   const [cartItemsNumber, setCartItemsNumber] = useState<number>(0);
