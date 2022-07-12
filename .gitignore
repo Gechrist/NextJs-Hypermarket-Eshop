@@ -39,3 +39,7 @@ yarn-error.log*
 
 # todo
 todo
+
+# dbseed
+/pages/api/dbSeed.ts
+/data/seedData.ts
