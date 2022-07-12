@@ -18,7 +18,7 @@ const authOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         try {
           await dbUtils.connect();
           const user = await User.findOne({ email: credentials!.email });
@@ -42,7 +42,7 @@ const authOptions = {
     maxAge: 3600,
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user }: { user: any }) {
       if (user) {
         return true;
       } else {
@@ -52,7 +52,7 @@ const authOptions = {
         // return '/unauthorized'
       }
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.userID = user.id;
         token.isAdmin = user.isAdmin;
@@ -64,7 +64,7 @@ const authOptions = {
       return token;
     },
 
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (token) {
         session.userID = token.userID;
         session.isAdmin = token.isAdmin;
