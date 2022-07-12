@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiResponse } from 'next';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
+const handler = async (res: NextApiResponse<string>) => {
   res.send((process.env.PAYPAL_CLIENT_ID as string) || 'sb');
 };
 
