@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next';
 import { InferGetStaticPropsType } from 'next';
 import dbUtils from '../utils/db';
 import Car from '../models/Car';
-import Manufacturer from '../models/Manufacturer';
+// import Manufacturer from '../models/Manufacturer';
 import { byPropertiesOf } from '../utils/sort';
 import IndexCarSection from '../components/indexCarSection';
 import IndexCarCarousel from '../components/indexCarCarousel';
@@ -82,7 +82,7 @@ const Home: NextPage = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   await dbUtils.connect();
-  const manufacturer = await Manufacturer.find({});
+  // const manufacturer = await Manufacturer.find({});
   const res = await Car.find({})
     .select('model price description quantity featuredImage')
     .populate({
