@@ -17,7 +17,6 @@ import DownChevron from '../public/icons/downchevron.svg';
 import PayPalSpinner from '../public/icons/paypalSpinner.svg';
 import OrderSpinnerButton from '../public/icons/orderButtonSpinner.svg';
 import Modal from '../components/creditCardModal';
-import stripe from 'stripe';
 
 type SortingProperties = {
   model: string;
