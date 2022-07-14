@@ -28,12 +28,14 @@ const handler = async (
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const manufacturer = await Manufacturer.create([
               { brand: req.body.data.brand, icon: req.body.data.icon },
             ]);
             if (manufacturer) {
               res.send({ message: 'Manufacturer saved successfully' });
+              await dbUtils.disconnect();
             }
           }
           break;
@@ -43,6 +45,7 @@ const handler = async (
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const car = await Car.create([
               {
@@ -64,6 +67,7 @@ const handler = async (
             ]);
             if (car) {
               res.send({ message: 'Car saved successfully' });
+              await dbUtils.disconnect();
             }
           }
           break;
@@ -83,6 +87,7 @@ const handler = async (
           ]);
           if (user) {
             res.send({ message: 'User saved successfully' });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -118,14 +123,15 @@ const handler = async (
               id: order[0].id,
               email: order[0].orderEmail,
             });
+            await dbUtils.disconnect();
           }
           break;
         }
         default:
           res.status(500).send({ message: 'Incorrect query' });
+          await dbUtils.disconnect();
           break;
       }
-      await dbUtils.disconnect();
     }
   } catch (e) {
     console.log({ error: (e as Error).message });

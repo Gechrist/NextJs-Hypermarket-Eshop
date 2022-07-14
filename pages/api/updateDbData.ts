@@ -51,10 +51,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
             }
             await car.save();
             res.send({ message: 'Car updated successfully' });
+            await dbUtils.disconnect();
           } else {
             res.status(404).send({ message: 'Car not found' });
+            await dbUtils.disconnect();
           }
-
           break;
         }
         case 'User': {
@@ -90,13 +91,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
               }
               await user.save();
               res.send({ message: 'User updated successfully' });
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'User not found' });
+              res.status(400).send({ message: 'User not found' });
+              await dbUtils.disconnect();
             }
           } else {
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -105,6 +109,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const manufacturer = await Manufacturer.findById(req.body.id);
             if (manufacturer) {
@@ -114,8 +119,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
               }
               await manufacturer.save();
               res.send({ message: 'Manufacturer updated successfully' });
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'Manufacturer not found' });
+              res.status(400).send({ message: 'Manufacturer not found' });
+              await dbUtils.disconnect();
             }
           }
           break;
@@ -125,6 +132,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const order = await Order.findById(req.body.id);
             if (order) {
@@ -141,17 +149,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
               order.deliveredAt = req.body.data.deliveredAt;
               await order.save();
               res.send({ message: 'Order updated successfully' });
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'Order not found' });
+              res.status(400).send({ message: 'Order not found' });
+              await dbUtils.disconnect();
             }
           }
           break;
         }
         default:
           res.status(500).send({ message: 'Incorrect query' });
+          await dbUtils.disconnect();
           break;
       }
-      await dbUtils.disconnect();
     }
   } catch (e) {
     console.log({ error: (e as Error).message });

@@ -16,7 +16,7 @@ This is a full eshop custom built with [Next.JS](https://nextjs.org/) and [Tailw
 
 ## INSTALL INSTRUCTIONS
 
-A working installation of Next.JS is required. Just clone the repository and run npm install && npm run dev:
+A working installation of Next.JS is required. Just clone the repository and run npm install & npm run dev:
 
 ```
 git clone https://github.com/Gechrist/NextJs-Hypermarket-Eshop.git

@@ -19,17 +19,17 @@ type SortingProperties = {
   brand: string;
 };
 
-const fetchWithQuery = (url: string, type: string) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/text',
-    },
-    body: type,
-  }).then((r) => r.json());
-
 const NewCarProfile: FC = () => {
+  const fetchWithQuery = (url: string, type: string) =>
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/text',
+      },
+      body: type,
+    }).then((r) => r.json());
+
   let { data, error } = useSWR(
     ['/api/getDbData', 'Manufacturer'],
     fetchWithQuery

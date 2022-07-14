@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY as string);
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
   try {
     const amount = req.body.amount * 100;
 
@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {
     });
     res.send(paymentIntent);
   } catch (e: any) {
-    res.send(e.type);
+    res.send({ type: e.type });
     switch (e.type) {
       case 'StripeCardError':
         console.log(`A payment error occurred: ${e.message}`);

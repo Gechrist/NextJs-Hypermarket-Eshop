@@ -36,13 +36,16 @@ const handler = async (
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const users = await User.find({});
             if (users) {
               res.status(200).send(users);
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'No users found' });
+              res.status(400).send({ message: 'No users found' });
             }
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -50,8 +53,10 @@ const handler = async (
           const cars = await Car.find({});
           if (cars) {
             res.status(200).send(cars);
+            await dbUtils.disconnect();
           } else {
-            res.status(404).send({ message: 'No cars found' });
+            res.status(400).send({ message: 'No cars found' });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -59,26 +64,29 @@ const handler = async (
           const manufacturers = await Manufacturer.find({});
           if (manufacturers) {
             res.status(200).send(manufacturers);
+            await dbUtils.disconnect();
           } else {
-            res.status(404).send({ message: 'No manufacturers found' });
+            res.status(400).send({ message: 'No manufacturers found' });
+            await dbUtils.disconnect();
           }
-
           break;
         }
         case 'Order': {
           const orders = await Order.find({}).populate('user');
           if (orders) {
             res.status(200).send(orders);
+            await dbUtils.disconnect();
           } else {
-            res.status(404).send({ message: 'No orders found' });
+            res.status(400).send({ message: 'No orders found' });
+            await dbUtils.disconnect();
           }
           break;
         }
         case 'default':
           res.status(500).send({ message: 'Incorrect query' });
+          await dbUtils.disconnect();
           break;
       }
-      await dbUtils.disconnect();
     }
   } catch (e) {
     console.log({ serverError: (e as Error).message });

@@ -28,16 +28,16 @@ const handler = async (
         case 'Car': {
           const car = await Car.findById(req.body.id);
           const manufacturers = await Manufacturer.find({});
-          await dbUtils.disconnect();
           if (car) {
             res.send({
               car,
               manufacturers,
             });
+            await dbUtils.disconnect();
           } else {
-            res.status(404).send({ message: 'Car not found' });
+            res.status(400).send({ message: 'Car not found' });
+            await dbUtils.disconnect();
           }
-
           break;
         }
         case 'Manufacturer': {
@@ -45,12 +45,15 @@ const handler = async (
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           } else {
             const manufacturer = await Manufacturer.findById(req.body.id);
             if (manufacturer) {
               res.send(manufacturer);
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'Manufacturer not found' });
+              res.status(400).send({ message: 'Manufacturer not found' });
+              await dbUtils.disconnect();
             }
           }
           break;
@@ -63,15 +66,17 @@ const handler = async (
             const user = await User.findById(req.body.id).populate('orders');
             if (user) {
               res.send(user);
+              await dbUtils.disconnect();
             } else {
-              res.status(404).send({ message: 'User not found' });
+              res.status(400).send({ message: 'User not found' });
+              await dbUtils.disconnect();
             }
           } else {
             res.status(401).send({
               authError: 'Authentication Error',
             });
+            await dbUtils.disconnect();
           }
-
           break;
         }
         case 'Order': {
@@ -81,17 +86,18 @@ const handler = async (
           });
           if (order) {
             res.send(order);
+            await dbUtils.disconnect();
           } else {
-            res.status(404).send({ message: 'Order not found' });
+            res.status(400).send({ message: 'Order not found' });
+            await dbUtils.disconnect();
           }
-
           break;
         }
         default:
           res.status(500).send({ message: 'Incorrect query' });
+          await dbUtils.disconnect();
           break;
       }
-      await dbUtils.disconnect();
     }
   } catch (e) {
     console.log({ serverError: (e as Error).message });

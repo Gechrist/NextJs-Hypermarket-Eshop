@@ -15,7 +15,6 @@ type Props = {
 const LoginForm: FC<Props> = ({ loginWindow }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
-  router.prefetch('/');
 
   const {
     register,

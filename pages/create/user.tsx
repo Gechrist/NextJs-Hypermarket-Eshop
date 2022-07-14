@@ -3,9 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { User as UserData } from '../../data/seedData';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import EyeIcon from '../../public/icons/eye.svg';
 import EyeSlashIcon from '../../public/icons/eye-slash.svg';
-import { useSession } from 'next-auth/react';
 
 const NewUserProfile: FC = () => {
   const {

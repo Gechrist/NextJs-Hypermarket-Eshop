@@ -40,8 +40,6 @@ const CheckQuantity = async (item: {
   quantity: number;
   model: string;
 }) => {
-  console.log('checkstart');
-
   try {
     const response = await fetch('/api/getSingleDbData', {
       method: 'POST',
@@ -53,7 +51,6 @@ const CheckQuantity = async (item: {
     });
 
     const carResponse = await response.json();
-    console.log('carQ', carResponse);
     if (carResponse.car.quantity < item.quantity) {
       return {
         error: `Insufficient stock for ${item.model}. Please contact the administrator if you have already completed the payment.`,
@@ -72,7 +69,6 @@ const CheckQuantity = async (item: {
 };
 
 const UpdateQuantity = async (item: { _id: string; quantity: number }) => {
-  console.log('updatestart');
   try {
     const response = await fetch('/api/updateDbData', {
       method: 'PUT',

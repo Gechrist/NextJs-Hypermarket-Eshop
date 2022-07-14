@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { byPropertiesOf } from '../utils/sort';
-import cartUtils, { ItemCart } from '../utils/cart';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import cartUtils, { ItemCart } from '../utils/cart';
 import Image from 'next/image';
 import formatter from '../utils/prices';
 import DeleteItem from '../public/icons/deleteItem.svg';
@@ -17,6 +17,7 @@ import DownChevron from '../public/icons/downchevron.svg';
 import PayPalSpinner from '../public/icons/paypalSpinner.svg';
 import OrderSpinnerButton from '../public/icons/orderButtonSpinner.svg';
 import Modal from '../components/creditCardModal';
+import stripe from 'stripe';
 
 type SortingProperties = {
   model: string;
@@ -145,7 +146,7 @@ const Checkout = () => {
   }, [session]);
 
   useEffect(() => {
-    if (payWithCreditButton) {
+    if (payWithCreditButton && stripeIntentID) {
       updateStripe();
     }
   }, [payWithCreditButton, cartPrice]);
@@ -162,15 +163,17 @@ const Checkout = () => {
 
   //Paypal Methods
   const createPaypalOrder = (data: Record<string, unknown>, actions: any) => {
-    return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: (cartPrice + (cartPrice * 24) / 100 + 1).toFixed(2),
+    if (data) {
+      return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              value: (cartPrice + (cartPrice * 24) / 100 + 1).toFixed(2),
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
+    }
   };
   // paypal sandbox byer sb-43wqun16606549@personal.example.com
   // ^W/@cY2f
@@ -179,16 +182,18 @@ const Checkout = () => {
     data: Record<string, unknown>,
     actions: any
   ) => {
-    const payPalOrderData = await actions.order.capture();
-    setPayPalPaymentInfo({
-      ...payPalPaymentInfo,
-      orderID: payPalOrderData.id,
-      payer: payPalOrderData.payer,
-      status: payPalOrderData.status,
-      paymentID: payPalOrderData.purchase_units[0].payments.captures[0].id,
-      create_time: payPalOrderData.create_time,
-      update_time: payPalOrderData.update_time,
-    });
+    if (data) {
+      const payPalOrderData = await actions.order.capture();
+      setPayPalPaymentInfo({
+        ...payPalPaymentInfo,
+        orderID: payPalOrderData.id,
+        payer: payPalOrderData.payer,
+        status: payPalOrderData.status,
+        paymentID: payPalOrderData.purchase_units[0].payments.captures[0].id,
+        create_time: payPalOrderData.create_time,
+        update_time: payPalOrderData.update_time,
+      });
+    }
   };
 
   const onErrorPaypalOrder = (e: Record<string, unknown>) => {
@@ -236,7 +241,7 @@ const Checkout = () => {
         }),
       });
       const intent = await intentPromise.json();
-      if (Object.keys(intent).includes('type')) {
+      if (intent?.type) {
         toast.error('Something went wrong. Please contact the administrator');
         return;
       }
@@ -265,6 +270,9 @@ const Checkout = () => {
       const status = await stripeUpdateResponse.text();
       if (status === 'requires_payment_method') {
         setUpdatedStripeAmount(true);
+      } else {
+        toast.error('Something went wrong. Please contact the administrator');
+        return;
       }
     } catch (e) {
       console.log((e as Error).message);
@@ -366,12 +374,14 @@ const Checkout = () => {
       toast.error(
         'Please complete the payment with PayPal before placing the order'
       );
+      showOrderSpinner(false);
       return;
     }
     if (payWithCreditButton && !creditCardPaymentInfo.paymentID) {
       toast.error(
         'Please complete the payment with a credit card before placing the order'
       );
+      showOrderSpinner(false);
       return;
     }
 
@@ -397,7 +407,6 @@ const Checkout = () => {
               (item: ItemCart) => item._id === car._id
             ).length,
           });
-        console.log('cherror', check);
         if (check.error) {
           toast.error(check.error);
           return false;
@@ -606,7 +615,9 @@ const Checkout = () => {
                       rules={{
                         validate: {
                           required: (value) =>
-                            value === undefined || value === ''
+                            creditCardPaymentInfo.paymentID
+                              ? true
+                              : value === undefined || value === ''
                               ? 'Please select a payment method'
                               : true,
                         },
@@ -783,6 +794,15 @@ const Checkout = () => {
                                     payload: car._id,
                                   });
                                   e!.preventDefault();
+                                  if (payPalFormButtons) {
+                                    paypalDispatch({
+                                      type: 'resetOptions',
+                                      value: {
+                                        'client-id': payPalID,
+                                        currency: 'EUR',
+                                      },
+                                    });
+                                  }
                                 }}
                               />
                             </td>

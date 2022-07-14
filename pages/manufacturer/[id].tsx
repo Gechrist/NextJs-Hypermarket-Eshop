@@ -9,35 +9,45 @@ import { ParsedUrlQuery } from 'node:querystring';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 
-const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id, type }),
-  }).then((r) => r.json());
-
 const ManufacturerView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
+  const { data: session } = useSession();
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, type }),
+    }).then((r) => r.json());
+
   let { data, error } = useSWR(
     ['/api/getSingleDbData', router.query.id, 'Manufacturer'],
     fetchWithId
   );
-  if (data?.authError) {
-    router.push('/login');
-  }
-  if (data?.message) {
-    toast.error(`${data.message}`);
-  }
-  if (error) {
-    toast.error(`An unexpected error has occured: ${error}`);
-  }
-  const { data: session } = useSession();
-  const controller = new AbortController();
-  const signal = controller.signal;
+
+  useEffect(() => {
+    if (!session?.isAdmin) {
+      router.push('/login');
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (data?.authError) {
+      router.push('/login');
+    }
+    if (data?.message) {
+      toast.error(`${data.message}`);
+    }
+    if (error) {
+      toast.error(`An unexpected error has occured: ${error}`);
+    }
+  }, [data, error]);
 
   useEffect(() => {
     return () => {

@@ -14,19 +14,20 @@ type formArgs = {
   deliveredAt: Date | undefined;
 };
 
-const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id, type }),
-  }).then((r) => r.json());
-
 const OrderView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
+
+  const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, type }),
+    }).then((r) => r.json());
+
   let { data, error } = useSWR(
     ['/api/getSingleDbData', router.query.id, 'Order'],
     fetchWithId

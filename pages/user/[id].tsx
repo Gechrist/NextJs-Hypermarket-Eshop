@@ -4,41 +4,53 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'node:querystring';
 import useSWR, { useSWRConfig } from 'swr';
 import { toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
 import UserProfile from '../../components/userProfile';
 import Image from 'next/image';
 import LoadingIcon from '../../public/icons/three-dots.svg';
 import Link from 'next/link';
 import formatter from '../../utils/prices';
 
-const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id, type }),
-  }).then((r) => r.json());
-
 const UserView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
+  const { data: session } = useSession();
+
+  const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, type }),
+    }).then((r) => r.json());
+
   let { data, error } = useSWR(
     ['/api/getSingleDbData', router.query.id, 'User'],
     fetchWithId
   );
-  if (data?.authError) {
-    router.push('/login');
-  }
-  if (data?.message) {
-    toast.error(`${data.message}`);
-  }
-  if (error) {
-    toast.error(`An unexpected error has occured: ${error}`);
-  }
 
   const [profile, setProfile] = useState<boolean>(true);
   const [orders, setOrders] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (session && !session?.isAdmin && session?.userID !== router.query.id) {
+      router.push('/login');
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (data?.authError) {
+      router.push('/login');
+    }
+    if (data?.message) {
+      toast.error(`${data.message}`);
+    }
+    if (error) {
+      toast.error(`An unexpected error has occured: ${error}`);
+    }
+  }, [data, error]);
 
   useEffect(() => {
     if (Object.keys(router.query).includes('orders')) {
@@ -51,7 +63,12 @@ const UserView = () => {
     }
   }, [router]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(session);
+    if (!session?.isAdmin && session?.userID !== router.query.id) {
+      router.push('/login');
+    }
+  }, [session]);
 
   const userFormHandle = async (reqData: UserData): Promise<void> => {
     try {
@@ -115,8 +132,8 @@ const UserView = () => {
             </div>
           )}
           {orders && (
-            <div className="w-3/6 rounded bg-white text-black py-4">
-              {data.orders.length > 0 ? (
+            <div className="w-3/6 rounded bg-white text-black py-4 ">
+              {data?.orders?.length > 0 ? (
                 <table className="table-auto w-full">
                   <thead className="w-full border-b-2 border-grey-400">
                     <tr>
@@ -125,7 +142,7 @@ const UserView = () => {
                       <th>Date</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="overflow-y-scroll">
                     {data.orders.map((item: any, index: number) => (
                       <tr
                         className="text-center text-black bg-white border-b-2 border-grey-400"

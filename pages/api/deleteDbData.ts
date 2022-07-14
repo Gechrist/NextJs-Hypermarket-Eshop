@@ -17,12 +17,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
       origin: process.env.NEXTAUTH_URL,
       optionsSuccessStatus: 200,
     });
-    const dbConnection = await dbUtils.connect();
     if (!session?.isAdmin) {
       res.status(401).send({
         authError: 'Authentication Error',
       });
+      await dbUtils.disconnect();
     }
+    const dbConnection = await dbUtils.connect();
     if (dbConnection) {
       switch (req.body.type) {
         case 'manufacturer': {
@@ -30,6 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           const deleteSuccess = await Manufacturer.deleteOne(manufacturer);
           if (deleteSuccess) {
             res.send({ message: 'Manufacturer deleted successfully' });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -38,6 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           const deleteSuccess = await Car.deleteOne(car);
           if (deleteSuccess) {
             res.send({ message: 'Car deleted successfully' });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -46,6 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           const deleteSuccess = await User.deleteOne(user);
           if (deleteSuccess) {
             res.send({ message: 'User deleted successfully' });
+            await dbUtils.disconnect();
           }
           break;
         }
@@ -54,15 +58,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           const deleteSuccess = await Order.deleteOne(user);
           if (deleteSuccess) {
             res.send({ message: 'Order deleted successfully' });
+            await dbUtils.disconnect();
           }
           break;
         }
         default:
           res.status(500).send({ message: 'Incorrect query' });
+          await dbUtils.disconnect();
           break;
       }
     }
-    await dbUtils.disconnect();
   } catch (e) {
     console.log({ error: (e as Error).message });
     res.status(500).send({ message: (e as Error).message });

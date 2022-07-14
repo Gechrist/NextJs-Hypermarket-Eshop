@@ -6,7 +6,7 @@ const connect = async () => {
     mongoose.connections[0].readyState === 1
   ) {
     console.log('Already connected');
-    return;
+    return mongoose.connections[0];
   } else {
     await mongoose.disconnect();
   }

@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
               hideProgressBar={true}
               position="bottom-center"
               theme="dark"
-              toastClassName="bg-black border-2 border-white w-96"
+              toastClassName="bg-black border-2 border-white w-full"
               transition={Slide}
               pauseOnHover
             />
