@@ -29,7 +29,7 @@ const NewManufacturerProfile: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (session && !session?.isAdmin) {
       router.push('/login');
     }
   }, [session]);

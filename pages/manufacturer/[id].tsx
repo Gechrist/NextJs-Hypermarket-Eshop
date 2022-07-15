@@ -32,7 +32,7 @@ const ManufacturerView = () => {
   );
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (session && !session?.isAdmin) {
       router.push('/login');
     }
   }, [session]);

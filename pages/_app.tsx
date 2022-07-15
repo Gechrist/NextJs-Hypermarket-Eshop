@@ -1,11 +1,11 @@
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
-import Layout from '../components/layout';
 import { ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { StateContextProvider } from '../utils/context';
 import { SessionProvider } from 'next-auth/react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import Layout from '../components/layout';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

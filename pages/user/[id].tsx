@@ -63,13 +63,6 @@ const UserView = () => {
     }
   }, [router]);
 
-  useEffect(() => {
-    console.log(session);
-    if (!session?.isAdmin && session?.userID !== router.query.id) {
-      router.push('/login');
-    }
-  }, [session]);
-
   const userFormHandle = async (reqData: UserData): Promise<void> => {
     try {
       await mutate(

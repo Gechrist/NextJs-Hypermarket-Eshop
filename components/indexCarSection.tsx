@@ -45,7 +45,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
               </button>
             </div>
           ) : (
-            <p>Out of stock</p>
+            <p className="text-center">Out of stock</p>
           )}
         </div>
         <div className="flex flex-col w-full md:w-3/6">

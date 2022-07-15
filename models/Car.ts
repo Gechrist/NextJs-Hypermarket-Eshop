@@ -4,7 +4,7 @@ const carSchema = new mongoose.Schema(
   {
     model: { type: String, required: true },
     manufacturer: { type: mongoose.Schema.Types.ObjectId, ref: 'Manufacturer' },
-    hP: { type: Number },
+    horsepower: { type: Number },
     specifications: { type: String },
     weight: { type: Number },
     speed: { type: String },

@@ -67,7 +67,7 @@ const NewCarProfile: FC = () => {
   }, [imagePreviews]);
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (session && !session?.isAdmin) {
       router.push('/login');
     }
   }, [session]);
@@ -191,7 +191,7 @@ const NewCarProfile: FC = () => {
                 id="hp"
                 type="text"
                 className="text-black  border-b-2 border-grey-400 text-center flex-grow"
-                {...register('hP')}
+                {...register('horsepower')}
               />
             </div>
 

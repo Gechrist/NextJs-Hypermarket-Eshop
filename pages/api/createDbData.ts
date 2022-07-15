@@ -51,7 +51,7 @@ const handler = async (
               {
                 model: req.body.data.model,
                 manufacturer: req.body.data.manufacturer,
-                hP: req.body.data.hP,
+                horsepower: req.body.data.horsepower,
                 specifications: req.body.data.specifications,
                 weight: req.body.data.weight,
                 speed: req.body.data.speed,

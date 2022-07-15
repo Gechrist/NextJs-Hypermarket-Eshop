@@ -12,7 +12,7 @@ type User = {
 interface Car {
   model: string;
   manufacturer: string;
-  hP: number;
+  horsepower: number;
   specifications: string;
   weight: number;
   speed: string;
@@ -130,7 +130,7 @@ const Users: User[] = [
 const Cars: Car[] = [
   {
     model: 'Ferrari LaFerrari',
-    hP: 950,
+    horsepower: 950,
     manufacturer: '61cec934ec2717948519d935',
     specifications:
       '6.262cc, V12, 790bhp/9000rpm, 700Nm/6750rpm, 60kg lithium ion battery 160bhp/269Nm',
@@ -153,7 +153,7 @@ const Cars: Car[] = [
   {
     model: 'McLaren P1',
     manufacturer: '61cec934ec2717948519d937',
-    hP: 903,
+    horsepower: 903,
     specifications:
       '3.799cc, V8, 727bhp/7500rpm, 720Nm/4000rpm, McLaren E-Motor 177bhp/260Nm',
     weight: 1450,
@@ -172,7 +172,7 @@ const Cars: Car[] = [
   {
     model: 'Lotus Evija',
     manufacturer: '61cec934ec2717948519d93a',
-    hP: 1974,
+    horsepower: 1974,
     specifications: '1974bhp, 1700Nm, 4 Integral Powertrain electric motors',
     weight: 1680,
     speed: '320+',
@@ -190,7 +190,7 @@ const Cars: Car[] = [
   {
     model: 'Aston Martin Vulcan',
     manufacturer: '61cec934ec2717948519d936',
-    hP: 820,
+    horsepower: 820,
     specifications: '6.998cc, V12, 820bhp/7750rpm, 780Nm/6500rpm',
     weight: 1350,
     speed: '360',
@@ -207,7 +207,7 @@ const Cars: Car[] = [
   {
     model: 'Pagani Huayra Roadster',
     manufacturer: '61cec934ec2717948519d938',
-    hP: 764,
+    horsepower: 764,
     specifications: '5.980cc, V12, 764bhp/5500rpm, 1000Nm/2.250-4.500rpm',
     weight: 1280,
     speed: '383',
@@ -224,7 +224,7 @@ const Cars: Car[] = [
   {
     model: 'Lamborghini Centenario',
     manufacturer: '61cec934ec2717948519d93b',
-    hP: 770,
+    horsepower: 770,
     specifications: '6.498cc, V12, 770bhp/8500rpm, 690Nm/5500rpm',
     weight: 1520,
     speed: '350+',
@@ -241,7 +241,7 @@ const Cars: Car[] = [
   {
     model: 'Koenigsegg One:1',
     manufacturer: '61cec934ec2717948519d939',
-    hP: 1341,
+    horsepower: 1341,
     specifications: '4,998cc, V8, 1341bhp/7500rpm, 1371Nm/6000rpm',
     weight: 1360,
     speed: '440',

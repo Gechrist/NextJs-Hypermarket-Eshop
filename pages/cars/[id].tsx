@@ -65,7 +65,7 @@ const Cars: NextPage = ({
                   </tr>
                   <tr className="border-b border-gray-700">
                     <td>BHP:</td>
-                    <td>{car.hP} bhp</td>
+                    <td>{car.horsepower} bhp</td>
                   </tr>
                   <tr className="border-b border-gray-700">
                     <td>Electric:</td>
@@ -138,7 +138,7 @@ const Cars: NextPage = ({
               </button>
             </div>
           ) : (
-            <p>Out of stock</p>
+            <p className="text-center">Out of stock</p>
           )}
         </div>
       ) : (

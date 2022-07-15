@@ -19,7 +19,7 @@ type Props = {
   formHandle({
     model,
     manufacturer,
-    hP,
+    horsepower,
     specifications,
     weight,
     speed,
@@ -67,7 +67,7 @@ const CarProfile: FC<Props> = ({
   const defaultValues = {
     model: formCarData.model,
     manufacturer: formCarData.manufacturer,
-    hP: formCarData.hP,
+    horsepower: formCarData.horsepower,
     specifications: formCarData.specifications,
     weight: formCarData.weight,
     speed: formCarData.speed,
@@ -165,9 +165,9 @@ const CarProfile: FC<Props> = ({
               <input
                 id="hp"
                 type="text"
-                defaultValue={defaultValues.hP}
+                defaultValue={defaultValues.horsepower}
                 className="text-black border-b-2 border-grey-400 text-center  flex-grow"
-                {...register('hP')}
+                {...register('horsepower')}
               />
             </div>
 

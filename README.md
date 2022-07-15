@@ -27,6 +27,10 @@ npm run dev
 
 Open http://localhost:3000 with your browser to see the result.
 
+## LICENSE
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## AUTHOR
 
 - [Profile](https://github.com/Gechrist/NextJS-Imdb 'George Christodoulou')

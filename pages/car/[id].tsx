@@ -31,7 +31,7 @@ const CarView = () => {
     fetchWithId
   );
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (session && !session?.isAdmin) {
       router.push('/login');
     }
   }, [session]);

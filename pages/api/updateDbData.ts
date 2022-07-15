@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           if (car) {
             car.model = req.body.data.model || car.model;
             car.manufacturer = req.body.data.manufacturer || car.manufacturer;
-            car.hP = req.body.data.hP || car.hp;
+            car.horsepower = req.body.data.horsepower || car.hp;
             car.specifications =
               req.body.data.specifications || car.specifications;
             car.weight = req.body.data.weight || car.weight;

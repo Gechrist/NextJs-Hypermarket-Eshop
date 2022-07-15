@@ -54,8 +54,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<{}>) => {
           break;
         }
         case 'order': {
-          const user = await Order.findById(req.body.id);
-          const deleteSuccess = await Order.deleteOne(user);
+          const order = await Order.findById(req.body.id);
+          const deleteSuccess = await Order.deleteOne(order);
           if (deleteSuccess) {
             res.send({ message: 'Order deleted successfully' });
             await dbUtils.disconnect();

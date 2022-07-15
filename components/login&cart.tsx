@@ -110,7 +110,7 @@ const Login = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="mt-8 flex flex-col divide-double border-2 border-black w-48 h-36 space-y-2 bg-white text-black rounded p-2">
+                  <div className="mt-8 grid divide-double border-2 border-black w-48 h-36 content-center space-y-4 bg-white text-black rounded p-2">
                     <div className=" link text-center bg-gray-200 content-center">
                       <Link href={`/user/${session.userID}?profile`} passHref>
                         Profile
@@ -127,6 +127,7 @@ const Login = () => {
                         onClick={() => {
                           setShowForm(false);
                           signOut({ redirect: false });
+                          router.push('/');
                           Cookies.remove('userInfo');
                         }}
                       >
