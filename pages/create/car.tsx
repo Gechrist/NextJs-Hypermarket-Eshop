@@ -67,7 +67,7 @@ const NewCarProfile: FC = () => {
   }, [imagePreviews]);
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (!session || (session && !session?.isAdmin)) {
       router.push('/login');
     }
   }, [session]);
