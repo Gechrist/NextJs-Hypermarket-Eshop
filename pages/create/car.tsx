@@ -61,16 +61,16 @@ const NewCarProfile: FC = () => {
   const imageGalleryFiles = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    return () => {
-      imagePreviews.forEach((image) => URL.revokeObjectURL(image));
-    };
-  }, [imagePreviews]);
-
-  useEffect(() => {
     if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
     }
   }, [session, status]);
+
+  useEffect(() => {
+    return () => {
+      imagePreviews.forEach((image) => URL.revokeObjectURL(image));
+    };
+  }, [imagePreviews]);
 
   const controller = new AbortController();
   const signal = controller.signal;
