@@ -42,7 +42,7 @@ const NewCarProfile: FC = () => {
     formState: { errors },
   } = useForm();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   if (error) {
@@ -67,10 +67,10 @@ const NewCarProfile: FC = () => {
   }, [imagePreviews]);
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
     }
-  }, [session]);
+  }, [session, status]);
 
   const controller = new AbortController();
   const signal = controller.signal;

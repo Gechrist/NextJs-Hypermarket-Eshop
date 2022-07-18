@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 import { PrevButton, NextButton } from '../utils/emblaCarouselButtons';
+import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
-import ImageModal from '../components/fullImageModal';
+import ImageModal from './fullImageModal';
 
 const EmblaCarousel = ({ sections, car }: any) => {
   const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });

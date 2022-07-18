@@ -14,7 +14,7 @@ import formatter from '../../utils/prices';
 const UserView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const fetchWithId = (url: string, id: ParsedUrlQuery, type: string) =>
     fetch(url, {
@@ -35,7 +35,11 @@ const UserView = () => {
   const [orders, setOrders] = useState<boolean>(false);
 
   useEffect(() => {
-    if (session && !session?.isAdmin && session?.userID !== router.query.id) {
+    if (
+      status != 'loading' &&
+      !session?.isAdmin &&
+      session?.userID !== router.query.id
+    ) {
       router.push('/login');
     }
   }, [session]);

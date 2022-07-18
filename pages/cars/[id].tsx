@@ -5,7 +5,7 @@ import formatter from '../../utils/prices';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { InferGetStaticPropsType } from 'next';
 import type { NextPage } from 'next';
-import IndividualCarCarousel from '../../components/individualCarCarousel';
+import CarImageCarousel from '../../components/carImageCarousel';
 import { StateContext } from '../../utils/context';
 import Meta from '../../components/meta';
 
@@ -16,9 +16,7 @@ const Cars: NextPage = ({
   const [images, setImages] = useState<Array<string>>([]);
 
   useEffect(() => {
-    car.featuredImage &&
-      car.featuredImage !== '' &&
-      setImages((images) => [...images, car.featuredImage]);
+    car.featuredImage && setImages((images) => [...images, car.featuredImage]);
     car.imageGallery.length > 0 &&
       car.imageGallery.map((item: string) => {
         item !== '' && setImages((images) => [...images, item]);
@@ -117,7 +115,7 @@ const Cars: NextPage = ({
             <div className="flex flex-col mt-2 w-full md:w-3/6">
               {car.featuredImage && (
                 <div className="relative block md:justify-end w-full h-72 md:h-full">
-                  <IndividualCarCarousel sections={images} car={car.model} />
+                  <CarImageCarousel sections={images} car={car.model} />
                 </div>
               )}
             </div>

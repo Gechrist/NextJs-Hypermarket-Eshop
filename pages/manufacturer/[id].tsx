@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 const ManufacturerView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const controller = new AbortController();
   const signal = controller.signal;
 
@@ -32,10 +32,10 @@ const ManufacturerView = () => {
   );
 
   useEffect(() => {
-    if (session && !session?.isAdmin) {
+    if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
     }
-  }, [session]);
+  }, [session, status]);
 
   useEffect(() => {
     if (data?.authError) {

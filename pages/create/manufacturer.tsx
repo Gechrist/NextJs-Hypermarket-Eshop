@@ -17,7 +17,7 @@ const NewManufacturerProfile: FC = () => {
     formState: { errors },
   } = useForm();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const controller = new AbortController();
   const signal = controller.signal;
@@ -29,10 +29,10 @@ const NewManufacturerProfile: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (session && !session?.isAdmin) {
+    if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
     }
-  }, [session]);
+  }, [session, status]);
 
   const formHandle = async (reqData: ManufacturerData): Promise<void> => {
     try {

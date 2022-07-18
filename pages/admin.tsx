@@ -13,13 +13,13 @@ const Admin: NextPage = () => {
   const [tableData, setTableData] = useState<string>('');
   const [updateState, setUpdateState] = useState<boolean>(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (!session?.isAdmin) {
+    if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
     }
-  }, [session]);
+  }, [session, status]);
 
   // run only when data changes and not on component mounting
   const isInitialMount = useRef(true);
@@ -33,6 +33,9 @@ const Admin: NextPage = () => {
     }
   }, [data]);
 
+  // if (session && !session.isAdmin) {
+  //   // router.push('/login');
+  // }
   const dataHandle = async (reqData: string) => {
     try {
       const response = await fetch('/api/getDbData', {

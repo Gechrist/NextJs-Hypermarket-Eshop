@@ -69,9 +69,9 @@ const Menu = () => {
 
   return (
     <div
-      className={
-        showMenu ? 'w-full z-40 absolute Menu' : 'md:w-2/6 absolute Menu'
-      }
+      className={`w-full z-40 Menu  ${
+        showMenu ? 'fixed' : 'md:w-2/6 absolute'
+      }`}
     >
       <div
         onClick={() => setShowMenu((prevState) => !prevState)}
@@ -119,7 +119,7 @@ const Menu = () => {
                   >
                     Home
                   </div>
-                  <div className="w-full bg-white text-black divide-y-2 divide-grey-400 overflow-y-auto h-96 scrollbar-hide">
+                  <div className="w-full bg-white text-black divide-y-2 divide-grey-400 overflow-y-auto h-96 scrollbar-hide border-b-2 border-t-2 border-grey-400">
                     {manufacturers?.length > 0 &&
                       manufacturers
                         .sort(byPropertiesOf<SortingProperties>(['brand']))
@@ -127,7 +127,7 @@ const Menu = () => {
                           item.icon ? (
                             <div
                               key={index}
-                              className="relative h-14 pb-2 hover:bg-gray-200 cursor-pointer"
+                              className="relative h-14 hover:bg-gray-200 cursor-pointer"
                               aria-label={`${item.brand} menu logo`}
                               onClick={() => {
                                 scrollToPage(`${item.brand.replace(/ /g, '')}`);
