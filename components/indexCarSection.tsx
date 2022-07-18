@@ -38,8 +38,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
             <div className="flex justify-center">
               <button
                 onClick={() => AddtoCart(car._id, car.model, 1, car.price)}
-                type="submit"
-                className="w-3/6"
+                className="w-3/6 "
               >
                 Add to Cart
               </button>

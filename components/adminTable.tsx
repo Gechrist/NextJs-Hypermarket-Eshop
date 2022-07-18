@@ -215,7 +215,7 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
               <button className="mb-2">Create New</button>
             </Link>
             <input
-              className="ml-2 mr-1 flex-shrink-0 text-black w-auto mb-2 rounded flex-grow"
+              className="ml-2 mr-1 shrink-0 text-black w-auto mb-2 rounded grow"
               type="text"
               placeholder="  Search..."
               value={search}

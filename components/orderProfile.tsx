@@ -52,14 +52,14 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
     <div className="flex flex-col mt-10 w-auto md:w-full space-y-10 bg-white text-black border-2 border-gray-400 p-2 rounded">
       <form onSubmit={handleSubmit(onSubmit)} method="PUT">
         <div className="md:flex md:flex-row md:space-x-2 md:justify-between">
-          <div className="flex flex-col space-y-2 mb-2 md:flex-grow">
+          <div className="flex flex-col space-y-2 mb-2 md:grow">
             <h2 className="text-center">Client & Shipping Details:</h2>
             <div className="flex flex-row justify-start md:justify-center space-x-4">
               <label className="w-24" htmlFor="fullName">
                 Full Name:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 type="text"
                 id="fullName"
                 disabled={session?.isAdmin ? false : true}
@@ -78,7 +78,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                 Email:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 type="text"
                 id="email"
                 defaultValue={defaultValues.orderEmail}
@@ -99,7 +99,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                 Address:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 id="address"
                 disabled={session?.isAdmin ? false : true}
                 type="text"
@@ -121,7 +121,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                 City:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 id="city"
                 disabled={session?.isAdmin ? false : true}
                 type="text"
@@ -138,7 +138,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                 Postal Code:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 id="postalCode"
                 disabled={session?.isAdmin ? false : true}
                 type="text"
@@ -157,7 +157,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                 Country:
               </label>
               <input
-                className="border-b-2 border-gray-400 flex-grow"
+                className="border-b-2 border-gray-400 grow"
                 type="text"
                 id="country"
                 disabled={session?.isAdmin ? false : true}
@@ -193,7 +193,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                     <select
                       id="paymentOption"
                       defaultValue={defaultValues.paymentMethod}
-                      className="text-black bg-gray-100 border-b-2 border-grey-400 flex-grow text-center"
+                      className="text-black bg-gray-100 border-b-2 border-grey-400 grow text-center"
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                         field.name = 'paymentMethod';
                         field.onChange(e.target.value);
@@ -212,7 +212,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
               <span role="alert">{errors.paymentMethod.message}</span>
             )}
           </div>
-          <div className=" flex flex-col bg-gray-200 p-2 mb-2 space-y-2 h-auto w-auto md:flex-grow">
+          <div className=" flex flex-col bg-gray-200 p-2 mb-2 space-y-2 h-auto w-auto md:grow">
             <h2 className="text-center">Order Details:</h2>
             <h2 className="font-bold">Order ID: {defaultValues.id}</h2>
             <table>

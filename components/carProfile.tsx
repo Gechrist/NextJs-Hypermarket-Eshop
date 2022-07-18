@@ -120,7 +120,7 @@ const CarProfile: FC<Props> = ({
     <div className="flex flex-col mt-10 w-auto md:w-full space-y-10 bg-white border-2 border-grey-400 p-2 rounded">
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <div className="lg:flex lg:flex-row lg:space-x-4 lg:justify-between">
-          <div className="lg:flex lg:flex-col lg:flex-grow">
+          <div className="lg:flex lg:flex-col lg:grow">
             <div className="flex flex-row justify-start md:justify-center space-x-4 mt-4 mb-4">
               <label className="w-24" htmlFor="model">
                 Model:
@@ -128,7 +128,7 @@ const CarProfile: FC<Props> = ({
               <input
                 type="text"
                 id="model"
-                className="text-black  border-b-2 border-grey-400 text-center flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center grow"
                 placeholder="Model"
                 aria-invalid={errors.model ? 'true' : 'false'}
                 defaultValue={defaultValues.model}
@@ -145,7 +145,7 @@ const CarProfile: FC<Props> = ({
               </label>
               <select
                 id="manufacturer"
-                className="text-black bg-gray-100 border-b-2 border-grey-400 flex-grow text-center"
+                className="text-black bg-gray-100 border-b-2 border-grey-400 grow text-center"
                 {...register('manufacturer')}
                 defaultValue={defaultValues.manufacturer}
               >
@@ -166,7 +166,7 @@ const CarProfile: FC<Props> = ({
                 id="hp"
                 type="text"
                 defaultValue={defaultValues.horsepower}
-                className="text-black border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black border-b-2 border-grey-400 text-center grow"
                 {...register('horsepower')}
               />
             </div>
@@ -176,7 +176,7 @@ const CarProfile: FC<Props> = ({
                 Specifications:
               </label>
               <textarea
-                className=" text-black border-b-2 border-grey-400   flex-grow"
+                className=" text-black border-b-2 border-grey-400 grow"
                 id="specifications"
                 {...register('specifications')}
                 defaultValue={defaultValues.specifications}
@@ -188,7 +188,7 @@ const CarProfile: FC<Props> = ({
                 Description:
               </label>
               <textarea
-                className="text-black border-b-2 border-grey-400   flex-grow"
+                className="text-black border-b-2 border-grey-400   grow"
                 id="description"
                 {...register('description')}
                 defaultValue={defaultValues.description}
@@ -201,7 +201,7 @@ const CarProfile: FC<Props> = ({
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="weight"
                 defaultValue={defaultValues.weight}
                 {...register('weight')}
@@ -209,14 +209,14 @@ const CarProfile: FC<Props> = ({
             </div>
           </div>
 
-          <div className="lg:flex lg:flex-col lg:flex-grow">
+          <div className="lg:flex lg:flex-col lg:grow">
             <div className="flex flex-row mt-4 mb-4 justify-start space-x-4">
               <label htmlFor="speed" className="w-24">
                 Speed:
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="speed"
                 defaultValue={defaultValues.speed}
                 {...register('speed')}
@@ -229,7 +229,7 @@ const CarProfile: FC<Props> = ({
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="acceleration"
                 defaultValue={defaultValues.acceleration}
                 {...register('acceleration', {
@@ -276,7 +276,7 @@ const CarProfile: FC<Props> = ({
                 type="number"
                 min="0"
                 step="any"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="price"
                 aria-invalid={errors.price ? 'true' : 'false'}
                 defaultValue={defaultValues.price}
@@ -293,7 +293,7 @@ const CarProfile: FC<Props> = ({
               </label>
               <input
                 type="text"
-                className="text-black border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black border-b-2 border-grey-400 text-center  grow"
                 id="quantity"
                 aria-invalid={errors.quantity ? 'true' : 'false'}
                 defaultValue={defaultValues.quantity}

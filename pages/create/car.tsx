@@ -148,7 +148,7 @@ const NewCarProfile: FC = () => {
     <div className="flex flex-col mx-auto mt-20 w-5/6 md:w-4/6 space-y-10 bg-white border-2 border-grey-400 p-2 rounded">
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <div className="lg:flex lg:flex-row lg:space-x-4 lg:justify-between">
-          <div className="lg:flex lg:flex-col lg:flex-grow">
+          <div className="lg:flex lg:flex-col lg:grow">
             <div className="flex flex-row justify-start md:justify-center space-x-4 mt-4 mb-4">
               <label className="w-24" htmlFor="model">
                 Model:
@@ -156,7 +156,7 @@ const NewCarProfile: FC = () => {
               <input
                 type="text"
                 id="model"
-                className="text-black  border-b-2 border-grey-400 text-center flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center grow"
                 aria-invalid={errors.model ? 'true' : 'false'}
                 {...register('model', {
                   required: { value: true, message: 'Model is required' },
@@ -171,7 +171,7 @@ const NewCarProfile: FC = () => {
               </label>
               <select
                 id="manufacturer"
-                className="text-black bg-gray-100  border-b-2 border-grey-400 flex-grow text-center"
+                className="text-black bg-gray-100  border-b-2 border-grey-400 grow text-center"
                 {...register('manufacturer')}
               >
                 {data
@@ -190,7 +190,7 @@ const NewCarProfile: FC = () => {
               <input
                 id="hp"
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center grow"
                 {...register('horsepower')}
               />
             </div>
@@ -200,7 +200,7 @@ const NewCarProfile: FC = () => {
                 Specifications:
               </label>
               <textarea
-                className="text-black  border-b-2 border-grey-400   flex-grow"
+                className="text-black  border-b-2 border-grey-400   grow"
                 id="specifications"
                 {...register('specifications')}
               ></textarea>
@@ -211,7 +211,7 @@ const NewCarProfile: FC = () => {
                 Description:
               </label>
               <textarea
-                className="text-black  border-b-2 border-grey-400  flex-grow"
+                className="text-black  border-b-2 border-grey-400  grow"
                 id="description"
                 {...register('description')}
               ></textarea>
@@ -223,21 +223,21 @@ const NewCarProfile: FC = () => {
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="weight"
                 {...register('weight')}
               />
             </div>
           </div>
 
-          <div className="lg:flex lg:flex-col lg:flex-grow">
+          <div className="lg:flex lg:flex-col lg:grow">
             <div className="flex flex-row mt-4 mb-4 justify-start space-x-4">
               <label htmlFor="speed" className="w-24">
                 Speed:
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="speed"
                 {...register('speed')}
               />
@@ -249,7 +249,7 @@ const NewCarProfile: FC = () => {
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="acceleration"
                 {...register('acceleration', {
                   pattern: {
@@ -269,7 +269,7 @@ const NewCarProfile: FC = () => {
               </label>
               <input
                 type="checkbox"
-                className="flex-grow"
+                className="grow"
                 id="hybrid"
                 {...register('hybrid')}
               />
@@ -281,7 +281,7 @@ const NewCarProfile: FC = () => {
               </label>
               <input
                 type="checkbox"
-                className="flex-grow"
+                className="grow"
                 id="electric"
                 {...register('electric')}
               />
@@ -295,7 +295,7 @@ const NewCarProfile: FC = () => {
                 type="number"
                 min="0"
                 step="any"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="price"
                 aria-invalid={errors.price ? 'true' : 'false'}
                 {...register('price', {
@@ -311,7 +311,7 @@ const NewCarProfile: FC = () => {
               </label>
               <input
                 type="text"
-                className="text-black  border-b-2 border-grey-400 text-center  flex-grow"
+                className="text-black  border-b-2 border-grey-400 text-center  grow"
                 id="quantity"
                 aria-invalid={errors.quantity ? 'true' : 'false'}
                 {...register('quantity', {

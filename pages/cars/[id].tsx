@@ -129,7 +129,6 @@ const Cars: NextPage = ({
                 onClick={() =>
                   AddtoCart(car._id, car.model, cartQuantity, car.price)
                 }
-                type="submit"
                 className="w-3/6"
               >
                 Add to Cart

@@ -28,7 +28,7 @@
     @apply text-red-700;
   }
   button {
-    @apply w-auto p-2 border-2 border-black rounded bg-indigo-600 text-white ring-white hover:text-black active:bg-indigo-500 focus:text-black;
+    @apply w-auto p-2 border-2 border-black rounded bg-yellow-400  text-black ring-white active:bg-yellow-200 !important;
   }
   th {
     @apply cursor-pointer active:bg-green-300;

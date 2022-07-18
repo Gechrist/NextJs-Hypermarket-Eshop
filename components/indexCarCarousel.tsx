@@ -39,8 +39,12 @@ const EmblaCarousel = ({ sections }: any) => {
           </div>
         </div>
         <div className="flex flex-row justify-between relative bottom-12 px-2">
-          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-          <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+          <div className={` ${!prevBtnEnabled && 'opacity-30'}`}>
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+          </div>
+          <div className={` ${!nextBtnEnabled && 'opacity-30'}`}>
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+          </div>
         </div>
       </div>
     </>

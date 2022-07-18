@@ -99,7 +99,7 @@ const NewManufacturerProfile: FC = () => {
           <input
             type="text"
             id="brand"
-            className="bg-white border-b-2 text-center border-gray-400 flex-grow"
+            className="bg-white border-b-2 text-center border-gray-400 grow"
             placeholder="Manufacturer brand"
             aria-invalid={errors.brand ? 'true' : 'false'}
             {...register('brand', {

@@ -484,14 +484,14 @@ const Checkout = () => {
           <div className="flex flex-col mt-10 w-auto md:w-full space-y-10 bg-white text-black border-2 border-gray-400 p-2 rounded">
             <form onSubmit={handleSubmit(onSubmit)} method="POST">
               <div className="md:flex md:flex-row md:space-x-2 md:justify-between">
-                <div className="flex flex-col space-y-2 mb-2 md:flex-grow">
+                <div className="flex flex-col space-y-2 mb-2 md:grow">
                   <h2 className="text-center">Shipping & Payment:</h2>
                   <div className="flex flex-row justify-start md:justify-center space-x-4">
                     <label className="w-24" htmlFor="fullName">
                       Full Name:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       type="text"
                       id="fullName"
                       aria-invalid={errors.fullName ? 'true' : 'false'}
@@ -511,7 +511,7 @@ const Checkout = () => {
                       Email:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       type="text"
                       id="email"
                       aria-invalid={errors.email ? 'true' : 'false'}
@@ -532,7 +532,7 @@ const Checkout = () => {
                       Address:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       id="address"
                       type="text"
                       aria-invalid={errors.address ? 'true' : 'false'}
@@ -552,7 +552,7 @@ const Checkout = () => {
                       City:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       id="city"
                       type="text"
                       aria-invalid={errors.city ? 'true' : 'false'}
@@ -569,7 +569,7 @@ const Checkout = () => {
                       Postal Code:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       id="postalCode"
                       type="text"
                       aria-invalid={errors.postalCode ? 'true' : 'false'}
@@ -589,7 +589,7 @@ const Checkout = () => {
                       Country:
                     </label>
                     <input
-                      className="border-b-2 border-gray-400 flex-grow"
+                      className="border-b-2 border-gray-400 grow"
                       type="text"
                       id="country"
                       // readOnly
@@ -625,7 +625,7 @@ const Checkout = () => {
                       render={({ field }) => (
                         <select
                           id="paymentOption"
-                          className="text-black bg-gray-100 border-b-2 border-grey-400 flex-grow text-center"
+                          className="text-black bg-gray-100 border-b-2 border-grey-400 grow text-center"
                           onChange={(
                             e: React.ChangeEvent<HTMLSelectElement>
                           ) => {
@@ -684,7 +684,7 @@ const Checkout = () => {
                   {payWithCreditButton && !creditCardPaymentInfo.paymentID && (
                     <div className="flex flex-row justify-center md:justify-end mt-4 mb-4">
                       <button
-                        className="bg-black text-white text-center italic p-1 rounded flex-grow ml-28 hover:bg-gray-900"
+                        className="bg-black text-white text-center italic p-1 rounded grow ml-28 hover:bg-gray-900"
                         onClick={(e: React.FormEvent) => {
                           e.preventDefault();
                           openModal();
@@ -711,7 +711,7 @@ const Checkout = () => {
                     </Elements>
                   )}
                 </div>
-                <div className="grid bg-gray-200 p-2 mb-2 space-y-2 h-auto content-between w-auto md:flex-grow">
+                <div className="grid bg-gray-200 p-2 mb-2 space-y-2 h-auto content-between w-auto md:grow">
                   <h2 className="text-center">Order Summary:</h2>
                   <table>
                     <tbody>
