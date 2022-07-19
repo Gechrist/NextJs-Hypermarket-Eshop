@@ -53,13 +53,6 @@ const Menu = () => {
     router.prefetch('/');
   }, [router]);
 
-  const scrollToPage = async (target: string) => {
-    if (router.pathname !== '/') {
-      await router.push('/');
-    }
-    window.fullpage_api.moveTo(target, 0);
-  };
-
   const animationMenu = useTransition(showMenu, {
     enter: {
       transform: `translate3d(${0},${0},${0})`,
@@ -113,7 +106,7 @@ const Menu = () => {
                   <div
                     className="h-auto w-auto text-center link pb-2"
                     onClick={() => {
-                      scrollToPage('top');
+                      router.push('/');
                       setShowMenu(false);
                     }}
                   >
@@ -130,7 +123,9 @@ const Menu = () => {
                               className="relative h-14 hover:bg-gray-200 cursor-pointer"
                               aria-label={`${item.brand} menu logo`}
                               onClick={() => {
-                                scrollToPage(`${item.brand.replace(/ /g, '')}`);
+                                window.location.assign(
+                                  `/#${item.brand.replace(/ /g, '')}`
+                                );
                                 setShowMenu(false);
                               }}
                             >
@@ -146,7 +141,9 @@ const Menu = () => {
                             <div
                               className="w-full h-8"
                               onClick={() => {
-                                scrollToPage(`${item.brand.replace(/ /g, '')}`);
+                                window.location.assign(
+                                  `/#${item.brand.replace(/ /g, '')}`
+                                );
                                 setShowMenu(false);
                               }}
                             >

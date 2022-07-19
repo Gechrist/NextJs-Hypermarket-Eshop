@@ -58,7 +58,7 @@ const Register: FC = () => {
         <input
           type="text"
           className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
-          placeholder="Your Name"
+          placeholder="Your name"
           aria-invalid={errors.name ? 'true' : 'false'}
           {...register('name', {
             required: { value: true, message: 'Name is required' },
@@ -123,7 +123,7 @@ const Register: FC = () => {
           type={showPassword ? 'text' : 'password'}
           className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-          placeholder="Confirm new password"
+          placeholder="Confirm your password"
           {...register('confirmPassword', {
             required: {
               value: true,
@@ -142,18 +142,6 @@ const Register: FC = () => {
             {errors.confirmPassword.message}
           </span>
         )}
-        {/* {userInfo && userInfo.isAdmin(
-          <div className="flex flex-row justify-center space-x-2">
-            <label htmlFor="admin">Administrator:</label>
-            <input
-              type="checkbox"
-              id="admin"
-              className="bg-white mt-3 border-b-2 border-gray-400"
-              placeholder="Your address"
-              {...register('isAdmin')}
-            />
-          </div>
-        )} */}
         <input
           type="text"
           className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
