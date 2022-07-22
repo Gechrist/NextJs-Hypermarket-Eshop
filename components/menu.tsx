@@ -12,8 +12,6 @@ type SortingProperties = {
   brand: string;
 };
 const Menu = () => {
-  // const Menu: FC<Props> = ({ manufacturers }: Props) => {
-
   const [manufacturers, setManufacturers] = useState<Array<Manufacturer>>([]);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { data: session } = useSession();
@@ -55,9 +53,11 @@ const Menu = () => {
 
   const animationMenu = useTransition(showMenu, {
     enter: {
-      transform: `translate3d(${0},${0},${0})`,
+      x: 0,
     },
-    from: { transform: `translate3d(${-100}%,${0},${0})` },
+    from: {
+      x: -100,
+    },
   });
 
   return (

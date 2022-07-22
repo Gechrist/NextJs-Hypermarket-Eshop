@@ -54,7 +54,7 @@ const Cars: NextPage = ({
           <h1 className="text-center">{car.model}</h1>
           <p className="text-center italic p-1 lg:p-8">{car.description}</p>
           <div className="flex-col md:flex-row md:h-auto flex">
-            <div className="flex mx mt-14 md:mt-0 order-last pt-2 flex-col space-y-4 md:space-y-8 w-full md:w-3/6">
+            <div className="flex mx md:ml-1 mt-14 md:mt-0 order-last pt-2 flex-col space-y-4 md:space-y-8 w-full md:w-3/6">
               <table>
                 <tbody>
                   <tr className="border-b border-gray-700 whitespace-nowrap">
@@ -88,20 +88,20 @@ const Cars: NextPage = ({
                   <tr className="border-b border-gray-700">
                     <td>Quantity:</td>
                     <td>
-                      <div className="flex flex-row py-2">
+                      <div className="flex flex-row ">
                         <p
-                          className="w-6 cursor-pointer rounded-l bg-white text-black text-center"
+                          className="w-6 py-1 cursor-pointer rounded-l bg-white text-black text-center"
                           onClick={() => {
                             cartQuantity > 1 ? decreaseQuantity() : null;
                           }}
                         >
                           {'<'}
                         </p>
-                        <p className="w-12 bg-white text-black text-center">
+                        <p className="w-12 py-1 bg-white text-black text-center">
                           {cartQuantity}
                         </p>
                         <p
-                          className="w-6 cursor-pointer rounded-r bg-white text-black text-center"
+                          className="w-6 py-1 cursor-pointer rounded-r bg-white text-black text-center"
                           onClick={() => increaseQuantity()}
                         >
                           {'>'}

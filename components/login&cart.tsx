@@ -32,12 +32,12 @@ const Login = () => {
   const [cartItemsNumber, setCartItemsNumber] = useState<number>(0);
 
   const animationLogin = useTransition(showForm, {
-    enter: { transform: `translate3d(${0},${34}%,${0})` },
-    from: { transform: `translate3d(${100}%,${34}%,${0})` },
+    enter: { transform: `translate3d(${0}%,${34}%,${0})` },
+    from: { transform: `translate3d(${0}%,${0}%,${0})` },
   });
   const animationCart = useTransition(showCart, {
     enter: { transform: `translate3d(${0},${50}%,${0})` },
-    from: { transform: `translate3d(${100}%,${50}%,${0})` },
+    from: { transform: `translate3d(${0}%,${0}%,${0})` },
   });
 
   return (
@@ -48,98 +48,94 @@ const Login = () => {
       <div className="text-white text-right text-xs absolute top-10 lg:top-8 right-11 md:right-20">
         {state?.orderItems.length > 0 && <p>{cartItemsNumber}</p>}
       </div>
-      <div>
-        <div
-          className="absolute right-14 z-40 md:right-24 top-4 w-10 lg:w-8 h-10 lg:h-8 cursor-pointer"
-          onClick={() => {
-            setShowCart((prevState) => !prevState);
-            setShowForm(false);
-          }}
-        >
-          <Image
-            src={GarageIcon}
-            alt="cart icon"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-        {animationCart(
-          (styles, item) =>
-            item && (
-              <animated.div style={styles}>
-                <div className="flex flex-col border-2 z-30 relative -top-28 border-black w-48 h-auto space-y-2 bg-white text-black rounded p-2">
-                  <div className="text-center Cart">
-                    <Cart cartItems={state.orderItems} />
+      <div
+        className="absolute right-14 z-40 md:right-24 top-4 w-10 lg:w-8 h-10 lg:h-8 cursor-pointer"
+        onClick={() => {
+          setShowCart((prevState) => !prevState);
+          setShowForm(false);
+        }}
+      >
+        <Image
+          src={GarageIcon}
+          alt="cart icon"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
+      {animationCart(
+        (styles, item) =>
+          item && (
+            <animated.div style={styles}>
+              <div className="flex flex-col border-2 z-30 relative -top-28 border-black w-48 h-auto space-y-2 bg-white text-black rounded p-2">
+                <div className="text-center Cart">
+                  <Cart cartItems={state.orderItems} />
+                </div>
+              </div>
+            </animated.div>
+          )
+      )}
+      <div
+        className="absolute right-1 z-30 top-4 w-10 lg:w-8 h-10 lg:h-8 cursor-pointer"
+        onClick={() => {
+          setShowForm((prevState) => !prevState);
+          setShowCart(false);
+        }}
+      >
+        <Image
+          src={AccountIcon}
+          alt="account icon"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
+      {animationLogin(
+        (styles, item) =>
+          item && (
+            <animated.div style={styles}>
+              {session === null ? (
+                <div className="flex flex-col border-2 border-black w-48 h-auto space-y-2 bg-white text-black rounded p-2">
+                  <LogIn loginWindow={setShowForm} />
+                  <div className="text-center link">
+                    <Link href="/passwordEmailReset" passHref>
+                      Forgot your password?
+                    </Link>
+                  </div>
+                  <div className="text-center link">
+                    <Link href="/register" passHref>
+                      Register
+                    </Link>
                   </div>
                 </div>
-              </animated.div>
-            )
-        )}
-      </div>
-      <div>
-        <div
-          className="absolute right-1 z-30 top-4 w-10 lg:w-8 h-10 lg:h-8 cursor-pointer"
-          onClick={() => {
-            setShowForm((prevState) => !prevState);
-            setShowCart(false);
-          }}
-        >
-          <Image
-            src={AccountIcon}
-            alt="account icon"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-        {animationLogin(
-          (styles, item) =>
-            item && (
-              <animated.div style={styles}>
-                {session === null ? (
-                  <div className="flex flex-col  border-2 border-black w-48 h-auto space-y-2 bg-white text-black rounded p-2">
-                    <LogIn loginWindow={setShowForm} />
-                    <div className="text-center hover:text-red-700 focus:text-red-700">
-                      <Link href="/passwordEmailReset" passHref>
-                        Forgot your password?
-                      </Link>
-                    </div>
-                    <div className="text-center hover:text-red-700 focus:text-red-700">
-                      <Link href="/register" passHref>
-                        Register
-                      </Link>
-                    </div>
+              ) : (
+                <div className="mt-8 grid divide-double border-2 border-black w-48 h-36 content-center space-y-4 bg-white text-black rounded p-2">
+                  <div className=" link text-center bg-gray-200 content-center">
+                    <Link href={`/user/${session.userID}?profile`} passHref>
+                      Profile
+                    </Link>
                   </div>
-                ) : (
-                  <div className="mt-8 grid divide-double border-2 border-black w-48 h-36 content-center space-y-4 bg-white text-black rounded p-2">
-                    <div className=" link text-center bg-gray-200 content-center">
-                      <Link href={`/user/${session.userID}?profile`} passHref>
-                        Profile
-                      </Link>
-                    </div>
-                    <div className="link text-center bg-gray-200">
-                      <Link href={`/user/${session.userID}?orders`} passHref>
-                        Orders
-                      </Link>
-                    </div>
-                    <div className="flex justify-center">
-                      <button
-                        className="w-full lg:w-3/6"
-                        onClick={() => {
-                          setShowForm(false);
-                          signOut({ redirect: false });
-                          router.push('/');
-                          Cookies.remove('userInfo');
-                        }}
-                      >
-                        Sign Out
-                      </button>
-                    </div>
+                  <div className="link text-center bg-gray-200">
+                    <Link href={`/user/${session.userID}?orders`} passHref>
+                      Orders
+                    </Link>
                   </div>
-                )}
-              </animated.div>
-            )
-        )}
-      </div>
+                  <div className="flex justify-center">
+                    <button
+                      className="w-full lg:w-3/6"
+                      onClick={() => {
+                        setShowForm(false);
+                        signOut({ redirect: false });
+                        router.push('/');
+                        Cookies.remove('userInfo');
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
+            </animated.div>
+          )
+      )}
     </div>
   );
 };

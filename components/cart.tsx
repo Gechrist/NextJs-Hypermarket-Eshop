@@ -1,14 +1,14 @@
+import { FC, useEffect, useState, useContext } from 'react';
+import { byPropertiesOf } from '../utils/sort';
+import { StateContext } from '../utils/context';
+import { ItemCart } from '../utils/cart';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FC, useEffect, useState, useContext } from 'react';
-import { StateContext } from '../utils/context';
 import formatter from '../utils/prices';
 import cartUtils from '../utils/cart';
-import { ItemCart } from '../utils/cart';
 import DeleteItem from '../public/icons/deleteItem.svg';
 import Increment from '../public/icons/incrementItem.svg';
 import Decrement from '../public/icons/decrementItem.svg';
-import { byPropertiesOf } from '../utils/sort';
 
 type Props = {
   cartItems: [

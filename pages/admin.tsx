@@ -10,6 +10,7 @@ import LoadingIndicator from '../components/loadingIndicator';
 const Admin: NextPage = () => {
   const [data, setData] = useState<Array<any>>([]);
   const [displayData, setDisplayData] = useState<boolean>(false);
+  const [displayPage, setDisplayPage] = useState<boolean>(false);
   const [tableData, setTableData] = useState<string>('');
   const [updateState, setUpdateState] = useState<boolean>(false);
   const router = useRouter();
@@ -18,6 +19,8 @@ const Admin: NextPage = () => {
   useEffect(() => {
     if (status != 'loading' && !session?.isAdmin) {
       router.push('/login');
+    } else {
+      setDisplayPage(true);
     }
   }, [session, status]);
 
@@ -62,78 +65,82 @@ const Admin: NextPage = () => {
   };
 
   return (
-    <div className="min-w-full mx-auto mt-20 md:mt-10">
-      <h2 className="text-center">Administration Board</h2>
-      <div className="flex flex-row justify-center space-x-2 mt-10 text-xl">
-        <button
-          onClick={() => {
-            // reset to initial state
-            if (displayData) {
-              setData([]);
-            }
-            // display data for the first time and then hide it.
-            if (!displayData || tableData !== 'Car') {
-              trackPromise(dataHandle('Car'));
-              setTableData('Car');
-            } else {
-              setData([]);
-            }
-          }}
-        >
-          Cars
-        </button>
-        <button
-          onClick={() => {
-            if (displayData) {
-              setData([]);
-            }
-            if (!displayData || tableData !== 'Manufacturer') {
-              trackPromise(dataHandle('Manufacturer'));
-              setTableData('Manufacturer');
-            } else {
-              setData([]);
-            }
-          }}
-        >
-          Manufacturers
-        </button>
-        <button
-          onClick={() => {
-            if (displayData) {
-              setData([]);
-            }
-            if (!displayData || tableData !== 'Order') {
-              trackPromise(dataHandle('Order'));
-              setTableData('Order');
-            } else {
-              setData([]);
-            }
-          }}
-        >
-          Orders
-        </button>
-        <button
-          onClick={() => {
-            if (displayData) {
-              setData([]);
-            }
-            if (!displayData || tableData !== 'User') {
-              trackPromise(dataHandle('User'));
-              setTableData('User');
-            } else {
-              setData([]);
-            }
-          }}
-        >
-          Users
-        </button>
-      </div>
+    <div>
+      {displayPage && (
+        <div className="min-w-full mx-auto mt-20 md:mt-10">
+          <h2 className="text-center">Administration Board</h2>
+          <div className="flex flex-row justify-center space-x-2 mt-10 text-xl">
+            <button
+              onClick={() => {
+                // reset to initial state
+                if (displayData) {
+                  setData([]);
+                }
+                // display data for the first time and then hide it.
+                if (!displayData || tableData !== 'Car') {
+                  trackPromise(dataHandle('Car'));
+                  setTableData('Car');
+                } else {
+                  setData([]);
+                }
+              }}
+            >
+              Cars
+            </button>
+            <button
+              onClick={() => {
+                if (displayData) {
+                  setData([]);
+                }
+                if (!displayData || tableData !== 'Manufacturer') {
+                  trackPromise(dataHandle('Manufacturer'));
+                  setTableData('Manufacturer');
+                } else {
+                  setData([]);
+                }
+              }}
+            >
+              Manufacturers
+            </button>
+            <button
+              onClick={() => {
+                if (displayData) {
+                  setData([]);
+                }
+                if (!displayData || tableData !== 'Order') {
+                  trackPromise(dataHandle('Order'));
+                  setTableData('Order');
+                } else {
+                  setData([]);
+                }
+              }}
+            >
+              Orders
+            </button>
+            <button
+              onClick={() => {
+                if (displayData) {
+                  setData([]);
+                }
+                if (!displayData || tableData !== 'User') {
+                  trackPromise(dataHandle('User'));
+                  setTableData('User');
+                } else {
+                  setData([]);
+                }
+              }}
+            >
+              Users
+            </button>
+          </div>
 
-      <div className="text-center mt-12">
-        <LoadingIndicator />
-      </div>
-      {displayData && (
-        <Table type={tableData} data={data} updateData={updateData} />
+          <div className="text-center mt-12">
+            <LoadingIndicator />
+          </div>
+          {displayData && (
+            <Table type={tableData} data={data} updateData={updateData} />
+          )}
+        </div>
       )}
     </div>
   );
