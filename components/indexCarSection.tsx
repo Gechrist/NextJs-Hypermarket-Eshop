@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import formatter from '../utils/prices';
 import Link from 'next/link';
 import { IndexCarModel } from '../pages/index';
@@ -48,7 +48,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
           )}
         </div>
         <div className="flex flex-col w-full md:w-3/6">
-          {car.featuredImage && (
+          {/* {car.featuredImage && (
             <div className="relative block md:justify-end w-full h-72 md:h-full">
               <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 top-0 bg-gradient-to-b from-gray-900" />
               <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 bottom-0 bg-gradient-to-t from-gray-900" />
@@ -60,7 +60,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
                 objectFit="cover"
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
