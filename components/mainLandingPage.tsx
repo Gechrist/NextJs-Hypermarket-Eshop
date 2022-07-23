@@ -1,11 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
-import MainImage from '../public/images/index.jpg';
+// import Image from 'next/image';
+// import MainImage from '../public/images/index.jpg';
 
 const mainLandingPage = () => {
   return (
     <div data-menuanchor="top" className="section">
-      <div className="min-w-screen min-h-screen top-0 z-0 block">
+      {/* <div className="min-w-screen min-h-screen top-0 z-0 block">
         <Image
           src={MainImage}
           alt="main background image"
@@ -13,7 +13,7 @@ const mainLandingPage = () => {
           layout="fill"
           objectFit="cover"
         />
-      </div>
+      </div> */}
       <div className="absolute bottom-14 left-0 right-0 flex justify-center">
         <div className="h-12 w-42 px-2 rounded-2xl border-2 border-white absolute">
           <div className="h-4 w-1 animate-bounce block mt-2 mx-auto bg-white relative border-2 border-white rounded-lg"></div>

@@ -9,7 +9,7 @@ import Car from '../models/Car';
 import Manufacturer from '../models/Manufacturer';
 import IndexCarSection from '../components/indexCarSection';
 import IndexCarCarousel from '../components/indexCarCarousel';
-// import MainLandingPage from '../components/mainLandingPage';
+import MainLandingPage from '../components/mainLandingPage';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Meta from '../components/meta';
 
@@ -54,8 +54,7 @@ const Home: NextPage = ({
           normalScrollElements=".Cart, .Menu"
           render={() => (
             <ReactFullpage.Wrapper>
-              {/* <MainLandingPage /> */}
-              <div data-menuanchor="top" className="section"></div>
+              <MainLandingPage />
               {groupedCars.map((item: any) => (
                 <div
                   data-anchor={item[0][0].manufacturer.brand.replace(/ /g, '')}
