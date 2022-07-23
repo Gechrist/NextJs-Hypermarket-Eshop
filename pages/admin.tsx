@@ -134,7 +134,7 @@ const Admin: NextPage = () => {
             </button>
           </div>
 
-          <div className="text-center mt-12 ml-6 lg:ml-0 ">
+          <div className="text-center mt-12 ml-8 lg:ml-0 ">
             <LoadingIndicator />
           </div>
           {displayData && (
