@@ -9,7 +9,7 @@ import Car from '../models/Car';
 import Manufacturer from '../models/Manufacturer';
 import IndexCarSection from '../components/indexCarSection';
 import IndexCarCarousel from '../components/indexCarCarousel';
-import MainLandingPage from '../components/mainLandingPage';
+// import MainLandingPage from '../components/mainLandingPage';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Meta from '../components/meta';
 
