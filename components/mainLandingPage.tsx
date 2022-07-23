@@ -18,7 +18,7 @@ const mainLandingPage = () => {
         <div className="h-12 w-42 px-2 rounded-2xl border-2 border-white absolute">
           <div className="h-4 w-1 animate-bounce block mt-2 mx-auto bg-white relative border-2 border-white rounded-lg"></div>
         </div>
-        <p className=" relative top-12 text-white">scroll down</p>
+        <p className="relative top-14 md:top-12 text-white">scroll down</p>
       </div>
     </div>
   );

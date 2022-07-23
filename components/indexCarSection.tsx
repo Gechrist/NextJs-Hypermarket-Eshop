@@ -29,9 +29,9 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
     <div className="min-h-screen min-w-screen grid items-center">
       <div className="flex-col md:flex-row md:h-auto flex">
         <div className="flex order-last pt-2 flex-col space-y-4 md:space-y-8 w-full md:w-3/6">
-          <Link href={`/cars/${car._id}`} passHref>
+          {/* <Link href={`/cars/${car._id}`} passHref>
             <h1 className="text-center link">{car.model}</h1>
-          </Link>
+          </Link> */}
           <p className="text-center italic p-1">{car.description}</p>
           <p className="text-center">{formatter.format(car.price)}</p>
           {car.quantity > 0 ? (
