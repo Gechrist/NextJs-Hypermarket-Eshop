@@ -144,7 +144,7 @@ const NewUserProfile: FC = () => {
           <div className="flex flex-row bg-white mx-4 justify-center border-b-2 border-gray-400 space-x-2">
             <label htmlFor="admin">Administrator:</label>
             <input
-              className="table-cell align-middle"
+              className="mb-1"
               type="checkbox"
               id="admin"
               {...register('isAdmin')}
