@@ -1,7 +1,7 @@
 import { FC } from 'react';
 // import Image from 'next/image';
 import formatter from '../utils/prices';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { IndexCarModel } from '../pages/index';
 import { useContext } from 'react';
 import { StateContext } from '../utils/context';
