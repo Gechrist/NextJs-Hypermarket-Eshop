@@ -8,9 +8,9 @@ This is a full eshop custom built with [Next.JS](https://nextjs.org/) and [Tailw
 
 - Fully working eshop.
 - Test payments can be made with PayPal (email:sb-43wqun16606549@personal.example.com, password: ^W/@cY2f ) and [Stripe testing cards](https://stripe.com/docs/testing#cards).
-- No obligation to create an account in order to place an order.
+- Orders placed without an account being required.
 - Full backend with CRUD functions. Search and sort features are available. Access the backend with the following credentials: email: admin@admin.com, password: 12#4ABcD
-- The landing page is navigated by scrolling down. Each manufacturer appears in one section in alphabetical order. If there are more than one cars from the same manufacturer available, they can be viewed by scrolling horizontally.
+- The landing page has been created with [fullPage.js](https://alvarotrigo.com/react-fullpage/). Each manufacturer appears in one section in alphabetical order. If there are more than one cars from the same manufacturer available, they can be viewed by scrolling horizontally.
 - Dedicated page for each car with specifications and images.
 - Emails for completed orders and password resets.
 
@@ -33,5 +33,5 @@ Open http://localhost:3000 with your browser to see the result.
 
 ## AUTHOR
 
-- [Profile](https://github.com/Gechrist/NextJS-Imdb 'George Christodoulou')
+- [Profile](https://github.com/Gechrist/)
 - [Email](mailto:gchris@hotmail.co.uk)

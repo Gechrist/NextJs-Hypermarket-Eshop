@@ -2,15 +2,15 @@ import { useEffect } from 'react';
 import type { NextPage } from 'next';
 import { GetStaticProps } from 'next';
 import { InferGetStaticPropsType } from 'next';
-import { groupBy } from 'lodash';
-import { byPropertiesOf } from '../utils/sort';
 import dbUtils from '../utils/db';
 import Car from '../models/Car';
 import Manufacturer from '../models/Manufacturer';
+import { byPropertiesOf } from '../utils/sort';
 import IndexCarSection from '../components/indexCarSection';
 import IndexCarCarousel from '../components/indexCarCarousel';
 import MainLandingPage from '../components/mainLandingPage';
 import ReactFullpage from '@fullpage/react-fullpage';
+import { groupBy } from 'lodash';
 import Meta from '../components/meta';
 
 type IndexCarModel = {
@@ -54,7 +54,7 @@ const Home: NextPage = ({
           normalScrollElements=".Cart, .Menu"
           render={() => (
             <ReactFullpage.Wrapper>
-              {/* <MainLandingPage /> */}
+              <MainLandingPage />
               {groupedCars.map((item: any) => (
                 <div
                   data-anchor={item[0][0].manufacturer.brand.replace(/ /g, '')}
