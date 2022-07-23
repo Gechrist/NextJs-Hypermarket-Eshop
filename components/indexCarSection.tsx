@@ -26,7 +26,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
   // };
 
   return (
-    <div className="min-h-screen min-w-screen grid items-center">
+    <div className=" grid items-center">
       <div className="flex-col md:flex-row md:h-auto flex">
         <div className="flex order-last pt-2 flex-col space-y-4 md:space-y-8 w-full md:w-3/6">
           {/* <Link href={`/cars/${car._id}`} passHref>
