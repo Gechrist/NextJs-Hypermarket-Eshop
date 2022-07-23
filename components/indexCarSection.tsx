@@ -3,27 +3,27 @@ import { FC } from 'react';
 import formatter from '../utils/prices';
 // import Link from 'next/link';
 import { IndexCarModel } from '../pages/index';
-import { useContext } from 'react';
-import { StateContext } from '../utils/context';
+// import { useContext } from 'react';
+// import { StateContext } from '../utils/context';
 
 type Props = {
   car: IndexCarModel;
 };
 
 const IndexCarSection: FC<Props> = ({ car }: Props) => {
-  const { dispatch } = useContext<any>(StateContext);
+  // const { dispatch } = useContext<any>(StateContext);
 
-  const AddtoCart = (
-    _id: string,
-    model: string,
-    quantity: number,
-    price: number
-  ) => {
-    dispatch({
-      type: 'ADDTO_CART',
-      payload: { _id, model, quantity, price },
-    });
-  };
+  // const AddtoCart = (
+  //   _id: string,
+  //   model: string,
+  //   quantity: number,
+  //   price: number
+  // ) => {
+  //   dispatch({
+  //     type: 'ADDTO_CART',
+  //     payload: { _id, model, quantity, price },
+  //   });
+  // };
 
   return (
     <div className="min-h-screen min-w-screen grid items-center">
@@ -34,7 +34,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
           </Link> */}
           <p className="text-center italic p-1">{car.description}</p>
           <p className="text-center">{formatter.format(car.price)}</p>
-          {car.quantity > 0 ? (
+          {/* {car.quantity > 0 ? (
             <div className="flex justify-center">
               <button
                 onClick={() => AddtoCart(car._id, car.model, 1, car.price)}
@@ -45,7 +45,7 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
             </div>
           ) : (
             <p className="text-center">Out of stock</p>
-          )}
+          )} */}
         </div>
         <div className="flex flex-col w-full md:w-3/6">
           {/* {car.featuredImage && (
