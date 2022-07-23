@@ -115,7 +115,9 @@ const Cart: FC<Props> = ({ cartItems }: Props) => {
                 </div>
               ))
           ) : (
-            <li className="bg-white font-bold">The cart is empty</li>
+            <li className="bg-white font-bold text-center">
+              The cart is empty
+            </li>
           )}
         </ul>
       </div>

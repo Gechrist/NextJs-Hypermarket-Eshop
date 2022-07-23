@@ -82,7 +82,7 @@ const Menu = () => {
           item && (
             <animated.div style={styles}>
               <div className="min-h-screen space-y-8 w-full md:w-1/6 bg-white border-r-2 border-gray-400 absolute">
-                <div className="flex flex-col top-10 md:top-20 w-full absolute text-black">
+                <div className="flex flex-col top-20 w-full absolute text-black">
                   {session?.isAdmin && (
                     <div
                       className="h-auto w-auto text-center link pb-2"

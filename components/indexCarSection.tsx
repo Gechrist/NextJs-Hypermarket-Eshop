@@ -25,7 +25,6 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
     });
   };
 
-  // min-h-screen min-w-screen
   return (
     <div className="grid items-center">
       <div className="flex-col md:flex-row md:h-auto flex">
