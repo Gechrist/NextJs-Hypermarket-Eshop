@@ -141,7 +141,7 @@ const NewUserProfile: FC = () => {
           </span>
         )}
         {session?.isAdmin && (
-          <div className="grid items-center bg-white mt-4 mb-4 justify-center w-full border-b-2 border-gray-400 space-x-2">
+          <div className="grid grid-cols-2 gap-2 place-content-center bg-white my-4  w-full border-b-2 border-gray-400 space-x-2">
             <label htmlFor="admin">Administrator:</label>
             <input type="checkbox" id="admin" {...register('isAdmin')} />
           </div>
