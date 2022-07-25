@@ -6,7 +6,7 @@ const mainLandingPage = () => {
   return (
     <div
       data-menuanchor="top"
-      className="section bg-[url('../public/images/index.jpg')] bg-contain"
+      className="section bg-[url('../public/images/index.jpg')] bg-cover bg-center"
     >
       {/* <div className="top-0 z-0 block">
         <Image
