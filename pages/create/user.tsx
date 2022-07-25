@@ -54,7 +54,7 @@ const NewUserProfile: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your Name"
           aria-invalid={errors.name ? 'true' : 'false'}
           {...register('name', {
@@ -68,7 +68,7 @@ const NewUserProfile: FC = () => {
         )}
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           aria-invalid={errors.email ? 'true' : 'false'}
           placeholder="Your email"
           {...register('email', {
@@ -88,7 +88,7 @@ const NewUserProfile: FC = () => {
           <input
             type={showPassword ? 'text' : 'password'}
             maxLength={16}
-            className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+            className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
             aria-invalid={errors.password ? 'true' : 'false'}
             placeholder="Your password"
             {...register('password', {
@@ -119,7 +119,7 @@ const NewUserProfile: FC = () => {
         <input
           type={showPassword ? 'text' : 'password'}
           maxLength={16}
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
           placeholder="Confirm new password"
           {...register('confirmPassword', {
@@ -141,32 +141,37 @@ const NewUserProfile: FC = () => {
           </span>
         )}
         {session?.isAdmin && (
-          <div className="grid grid-cols-2 gap-2 place-content-center bg-white my-4  w-full border-b-2 border-gray-400 space-x-2">
+          <div className="flex flex-row justify-center bg-white my-4  w-full border-b-2 border-gray-400 space-x-2">
             <label htmlFor="admin">Administrator:</label>
-            <input type="checkbox" id="admin" {...register('isAdmin')} />
+            <input
+              className="mb-2"
+              type="checkbox"
+              id="admin"
+              {...register('isAdmin')}
+            />
           </div>
         )}
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your address"
           {...register('address')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your city"
           {...register('city')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your postal code"
           {...register('postalCode')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your country"
           {...register('country')}
         />
