@@ -56,7 +56,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
       >
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your Name"
           aria-invalid={errors.name ? 'true' : 'false'}
           defaultValue={defaultValues.name}
@@ -67,7 +67,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
         {errors.name && <span role="alert">{errors.name.message}</span>}
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           aria-invalid={errors.email ? 'true' : 'false'}
           placeholder="Your email"
           defaultValue={defaultValues.email}
@@ -84,7 +84,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
           <input
             type={showPassword ? 'text' : 'password'}
             maxLength={16}
-            className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+            className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
             aria-invalid={errors.password ? 'true' : 'false'}
             placeholder="Your password"
             {...register('password', {
@@ -111,7 +111,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
         <input
           type={showPassword ? 'text' : 'password'}
           maxLength={16}
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           aria-invalid={errors.confirmPassword ? 'true' : 'false'}
           placeholder="Confirm your password"
           {...register('confirmPassword', {
@@ -131,11 +131,12 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
           <span role="alert">{errors.confirmPassword.message}</span>
         )}
         {session?.isAdmin && (
-          <div className="flex flex-row justify-center space-x-2 border-b-2 border-gray-400">
+          <div className="flex flex-row my-4 justify-center space-x-2 border-b-2 border-gray-400">
             <label htmlFor="admin" className="font-bold">
               Administrator:
             </label>
             <input
+              className="relative bottom-1.5 md:bottom-0"
               type="checkbox"
               id="admin"
               defaultChecked={defaultValues.isAdmin}
@@ -145,28 +146,28 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
         )}
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your address"
           defaultValue={defaultValues.address}
           {...register('address')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your city"
           defaultValue={defaultValues.city}
           {...register('city')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your postal code"
           defaultValue={defaultValues.postalCode}
           {...register('postalCode')}
         />
         <input
           type="text"
-          className="bg-white mt-4 mb-4 text-center w-full border-b-2 border-gray-400"
+          className="bg-white my-4 text-center w-full border-b-2 border-gray-400"
           placeholder="Your country"
           defaultValue={defaultValues.country}
           {...register('country')}

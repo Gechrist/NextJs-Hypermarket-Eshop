@@ -280,7 +280,6 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                     Paid:
                   </label>
                   <input
-                    className="md: mt-2"
                     id="isPaid"
                     disabled={session?.isAdmin ? false : true}
                     type="checkbox"
@@ -350,7 +349,6 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
                     Delivered:
                   </label>
                   <input
-                    className="md: mt-2"
                     id="isDelivered"
                     disabled={session?.isAdmin ? false : true}
                     type="checkbox"
