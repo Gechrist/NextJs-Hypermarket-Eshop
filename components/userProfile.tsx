@@ -136,7 +136,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
               Administrator:
             </label>
             <input
-              className="relative bottom-1.5 md:bottom-0"
+              className="relative bottom-1 md:bottom-0"
               type="checkbox"
               id="admin"
               defaultChecked={defaultValues.isAdmin}
