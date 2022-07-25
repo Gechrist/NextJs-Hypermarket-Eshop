@@ -141,14 +141,9 @@ const NewUserProfile: FC = () => {
           </span>
         )}
         {session?.isAdmin && (
-          <div className="flex flex-row bg-white mx-4 justify-center w-full border-b-2 border-gray-400 space-x-2">
+          <div className="flex flex-row bg-white mt-4 mb-4 justify-center w-full border-b-2 border-gray-400 space-x-2">
             <label htmlFor="admin">Administrator:</label>
-            <input
-              // className="mb-2"
-              type="checkbox"
-              id="admin"
-              {...register('isAdmin')}
-            />
+            <input type="checkbox" id="admin" {...register('isAdmin')} />
           </div>
         )}
         <input
