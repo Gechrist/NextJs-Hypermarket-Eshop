@@ -1,12 +1,13 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Manufacturer as ManufacturerData } from '../../data/seedData';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import RedXIcon from '../../public/icons/red-x.svg';
 import uploadImages from '../../utils/uploadImages';
-import { toast } from 'react-toastify';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import SpinnerButton from '../../public/icons/spinnerButton.svg';
 
 const NewManufacturerProfile: FC = () => {
   const {
@@ -46,12 +47,14 @@ const NewManufacturerProfile: FC = () => {
         body: JSON.stringify({ data: reqData, type: 'manufacturer' }),
       });
       const notification = await response.json();
+      setSaveButtonSpinner(false);
       if (notification.message.includes('error')) {
         toast.error(notification.message);
       } else {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${(e as Error).message}`);
     }
@@ -61,6 +64,7 @@ const NewManufacturerProfile: FC = () => {
     boolean | string
   >(false);
   const [imagePreviews, setImagePreviews] = useState<Array<string>>([]);
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
 
   const iconImageFile = useRef<HTMLInputElement | null>(null);
 
@@ -75,6 +79,7 @@ const NewManufacturerProfile: FC = () => {
     e
   ) => {
     e!.preventDefault();
+    setSaveButtonSpinner(true);
 
     const formData = new FormData();
     if (!data.icon) {
@@ -190,11 +195,25 @@ const NewManufacturerProfile: FC = () => {
           }}
         />
         {errors.icon && <span role="alert">{errors.icon.message}</span>}
-
         <div className="flex justify-center">
-          <button type="submit" className="w-full lg:w-3/6">
-            Save
-          </button>
+          {!saveButtonSpinner ? (
+            <button type="submit" className="w-full md:w-3/6">
+              Save
+            </button>
+          ) : (
+            <button type="submit" className="w-full md:w-3/6">
+              <div className="flex flex-row justify-center space-x-2 items-center">
+                <Image
+                  className="animate-spin"
+                  src={SpinnerButton}
+                  alt="Loading spinner for placing order"
+                  width="20px"
+                  height="20px"
+                />
+                <p>Save</p>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

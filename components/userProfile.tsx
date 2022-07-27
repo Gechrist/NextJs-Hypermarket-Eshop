@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import EyeIcon from '../public/icons/eye.svg';
 import EyeSlashIcon from '../public/icons/eye-slash.svg';
+import SpinnerButton from '../public/icons/spinnerButton.svg';
 
 type Props = {
   formData: UserData;
@@ -17,9 +18,16 @@ type Props = {
     postalCode,
     country,
   }: UserData): Promise<void>;
+  spinnerFunction: React.Dispatch<React.SetStateAction<boolean>>;
+  spinnerState: boolean;
 };
 
-const UserProfile: FC<Props> = ({ formData, formHandle }) => {
+const UserProfile: FC<Props> = ({
+  formData,
+  formHandle,
+  spinnerFunction,
+  spinnerState,
+}) => {
   const {
     register,
     handleSubmit,
@@ -44,6 +52,7 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
 
   const onSubmit: SubmitHandler<UserData> = (data: UserData, e) => {
     e!.preventDefault();
+    spinnerFunction(true);
     formHandle(data);
   };
 
@@ -173,9 +182,24 @@ const UserProfile: FC<Props> = ({ formData, formHandle }) => {
           {...register('country')}
         />
         <div className="flex justify-center">
-          <button type="submit" className="w-full lg:w-3/6">
-            Save
-          </button>
+          {!spinnerState ? (
+            <button type="submit" className="w-full md:w-3/6">
+              Save
+            </button>
+          ) : (
+            <button type="submit" className="w-full md:w-3/6">
+              <div className="flex flex-row justify-center space-x-2 items-center">
+                <Image
+                  className="animate-spin"
+                  src={SpinnerButton}
+                  alt="Loading spinner for placing order"
+                  width="20px"
+                  height="20px"
+                />
+                <p>Save</p>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

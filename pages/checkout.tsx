@@ -15,7 +15,7 @@ import DeleteItem from '../public/icons/deleteItem.svg';
 import UpChevron from '../public/icons/upchevron.svg';
 import DownChevron from '../public/icons/downchevron.svg';
 import PayPalSpinner from '../public/icons/paypalSpinner.svg';
-import OrderSpinnerButton from '../public/icons/orderButtonSpinner.svg';
+import SpinnerButton from '../public/icons/spinnerButton.svg';
 import Modal from '../components/creditCardModal';
 
 type SortingProperties = {
@@ -845,7 +845,7 @@ const Checkout = () => {
                     <div className="flex flex-row justify-center space-x-2 items-center">
                       <Image
                         className="animate-spin"
-                        src={OrderSpinnerButton}
+                        src={SpinnerButton}
                         alt="Loading spinner for placing order"
                         width="20px"
                         height="20px"

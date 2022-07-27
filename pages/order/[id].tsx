@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import OrderProfile from '../../components/orderProfile';
 import { useRouter } from 'next/router';
@@ -32,6 +32,7 @@ const OrderView = () => {
     ['/api/getSingleDbData', router.query.id, 'Order'],
     fetchWithId
   );
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
   const controller = new AbortController();
   const signal = controller.signal;
 
@@ -63,6 +64,7 @@ const OrderView = () => {
       });
       const notification = await response.json();
       await mutate(['/api/getSingleDbData', router.query.id, 'Order']);
+      setSaveButtonSpinner(false);
       if (
         notification.message.includes('error') ||
         notification.message.includes('not found')
@@ -72,6 +74,7 @@ const OrderView = () => {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${error}`);
     }
@@ -83,7 +86,12 @@ const OrderView = () => {
       {data ? (
         <div className="flex mx-auto justify-around flex-row md:w-4/6">
           {data && (
-            <OrderProfile formOrderData={data} formHandle={orderFormHandle} />
+            <OrderProfile
+              formOrderData={data}
+              formHandle={orderFormHandle}
+              spinnerFunction={setSaveButtonSpinner}
+              spinnerState={saveButtonSpinner}
+            />
           )}
         </div>
       ) : (

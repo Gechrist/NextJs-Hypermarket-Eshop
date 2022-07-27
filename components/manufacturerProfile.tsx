@@ -4,15 +4,20 @@ import { Manufacturer as ManufacturerData } from '../data/seedData';
 import Image from 'next/image';
 import RedXIcon from '../public/icons/red-x.svg';
 import uploadImages from '../utils/uploadImages';
+import SpinnerButton from '../public/icons/spinnerButton.svg';
 
 type Props = {
   formManufacturerData: ManufacturerData;
   formHandle({ brand, icon }: ManufacturerData): Promise<void>;
+  spinnerFunction: React.Dispatch<React.SetStateAction<boolean>>;
+  spinnerState: boolean;
 };
 
 const ManufacturerProfile: FC<Props> = ({
   formManufacturerData,
   formHandle,
+  spinnerFunction,
+  spinnerState,
 }: Props) => {
   const {
     register,
@@ -45,6 +50,7 @@ const ManufacturerProfile: FC<Props> = ({
     e
   ) => {
     e!.preventDefault();
+    spinnerFunction(true);
 
     const formData = new FormData();
     if (!data.icon) {
@@ -167,9 +173,24 @@ const ManufacturerProfile: FC<Props> = ({
         {errors.icon && <span role="alert">{errors.icon.message}</span>}
 
         <div className="flex justify-center">
-          <button type="submit" className="w-full lg:w-3/6">
-            Save
-          </button>
+          {!spinnerState ? (
+            <button type="submit" className="w-full md:w-3/6">
+              Save
+            </button>
+          ) : (
+            <button type="submit" className="w-full md:w-3/6">
+              <div className="flex flex-row justify-center space-x-2 items-center">
+                <Image
+                  className="animate-spin"
+                  src={SpinnerButton}
+                  alt="Loading spinner for placing order"
+                  width="20px"
+                  height="20px"
+                />
+                <p>Save</p>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

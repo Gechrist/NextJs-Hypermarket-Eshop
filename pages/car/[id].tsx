@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'node:querystring';
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ const CarView = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
   const { data: session, status } = useSession();
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
   const controller = new AbortController();
   const signal = controller.signal;
 
@@ -76,6 +77,7 @@ const CarView = () => {
         }),
       });
       const notification = await response.json();
+      setSaveButtonSpinner(false);
       await mutate(['/api/getSingleDbData', router.query.id, 'Car']);
       if (
         notification.message.includes('error') ||
@@ -86,6 +88,7 @@ const CarView = () => {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${error}`);
     }
@@ -100,6 +103,8 @@ const CarView = () => {
               formCarData={data?.car}
               formManufacturersData={data?.manufacturers}
               formHandle={carFormHandle}
+              spinnerFunction={setSaveButtonSpinner}
+              spinnerState={saveButtonSpinner}
             />
           )}
         </div>

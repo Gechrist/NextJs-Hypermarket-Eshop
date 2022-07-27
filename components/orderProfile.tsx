@@ -3,6 +3,8 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Order } from '../data/seedData';
 import { formArgs } from '../pages/order/[id]';
 import { useSession } from 'next-auth/react';
+import SpinnerButton from '../public/icons/spinnerButton.svg';
+import Image from 'next/image';
 import formatter from '../utils/prices';
 import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 import 'react-datetime-picker/dist/DateTimePicker.css';
@@ -13,9 +15,16 @@ interface OrderData extends Order {
 type Props = {
   formOrderData: OrderData;
   formHandle(args: formArgs): Promise<void>;
+  spinnerFunction: React.Dispatch<React.SetStateAction<boolean>>;
+  spinnerState: boolean;
 };
 
-const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
+const OrderProfile: FC<Props> = ({
+  formOrderData,
+  formHandle,
+  spinnerFunction,
+  spinnerState,
+}: Props) => {
   const {
     register,
     handleSubmit,
@@ -45,6 +54,7 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
 
   const onSubmit: SubmitHandler<formArgs> = async (data: formArgs, e) => {
     e!.preventDefault();
+    spinnerFunction(true);
     formHandle(data);
   };
 
@@ -414,9 +424,24 @@ const OrderProfile: FC<Props> = ({ formOrderData, formHandle }: Props) => {
         </div>
         {session?.isAdmin && (
           <div className="flex justify-center">
-            <button type="submit" className="w-full md:w-3/6">
-              Save
-            </button>
+            {!spinnerState ? (
+              <button type="submit" className="w-full md:w-3/6">
+                Save
+              </button>
+            ) : (
+              <button type="submit" className="w-full md:w-3/6">
+                <div className="flex flex-row justify-center space-x-2 items-center">
+                  <Image
+                    className="animate-spin"
+                    src={SpinnerButton}
+                    alt="Loading spinner for placing order"
+                    width="20px"
+                    height="20px"
+                  />
+                  <p>Save</p>
+                </div>
+              </button>
+            )}
           </div>
         )}
       </form>

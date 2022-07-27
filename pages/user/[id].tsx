@@ -33,6 +33,7 @@ const UserView = () => {
 
   const [profile, setProfile] = useState<boolean>(true);
   const [orders, setOrders] = useState<boolean>(false);
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
 
   useEffect(() => {
     if (
@@ -88,6 +89,7 @@ const UserView = () => {
       });
       const notification = await response.json();
       await mutate(['/api/getSingleDbData', router.query.id, 'User']);
+      setSaveButtonSpinner(false);
       if (
         notification.message.includes('error') ||
         notification.message.includes('not found')
@@ -97,6 +99,7 @@ const UserView = () => {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${error}`);
     }
@@ -125,7 +128,12 @@ const UserView = () => {
           {profile && data && (
             <div className="w-3/6">
               {' '}
-              <UserProfile formData={data} formHandle={userFormHandle} />
+              <UserProfile
+                formData={data}
+                formHandle={userFormHandle}
+                spinnerFunction={setSaveButtonSpinner}
+                spinnerState={saveButtonSpinner}
+              />
             </div>
           )}
           {orders && (

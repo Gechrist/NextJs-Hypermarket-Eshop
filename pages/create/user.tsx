@@ -2,9 +2,10 @@ import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { User as UserData } from '../../data/seedData';
 import { toast } from 'react-toastify';
-import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import EyeIcon from '../../public/icons/eye.svg';
+import SpinnerButton from '../../public/icons/spinnerButton.svg';
 import EyeSlashIcon from '../../public/icons/eye-slash.svg';
 
 const NewUserProfile: FC = () => {
@@ -27,6 +28,7 @@ const NewUserProfile: FC = () => {
         body: JSON.stringify({ data: reqData, type: 'user' }),
       });
       const notification = await response.json();
+      setSaveButtonSpinner(false);
       if (notification.message.includes('duplicate key')) {
         toast.error('This email is already in use');
         return;
@@ -40,14 +42,19 @@ const NewUserProfile: FC = () => {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${(e as Error).message}`);
     }
   };
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<UserData> = (data) => formHandle(data);
+  const onSubmit: SubmitHandler<UserData> = (data) => {
+    setSaveButtonSpinner(true);
+    formHandle(data);
+  };
 
   return (
     <div className="flex flex-col text-black w-5/6 md:w-4/6 mt-20 mx-auto space-y-10 border-2 border-black bg-white p-2 rounded">
@@ -176,9 +183,24 @@ const NewUserProfile: FC = () => {
           {...register('country')}
         />
         <div className="flex justify-center">
-          <button type="submit" className="w-full lg:w-3/6">
-            Save
-          </button>
+          {!saveButtonSpinner ? (
+            <button type="submit" className="w-full md:w-3/6">
+              Save
+            </button>
+          ) : (
+            <button type="submit" className="w-full md:w-3/6">
+              <div className="flex flex-row justify-center space-x-2 items-center">
+                <Image
+                  className="animate-spin"
+                  src={SpinnerButton}
+                  alt="Loading spinner for placing order"
+                  width="20px"
+                  height="20px"
+                />
+                <p>Save</p>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>

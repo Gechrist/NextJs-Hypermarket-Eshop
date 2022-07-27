@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
-import ManufacturerProfile from '../../components/manufacturerProfile';
 import { Manufacturer as ManufacturerData } from '../../data/seedData';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
-import LoadingIcon from '../../public/icons/three-dots.svg';
 import { ParsedUrlQuery } from 'node:querystring';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
+import ManufacturerProfile from '../../components/manufacturerProfile';
+import Image from 'next/image';
+import LoadingIcon from '../../public/icons/three-dots.svg';
 
 const ManufacturerView = () => {
   const router = useRouter();
@@ -61,6 +61,8 @@ const ManufacturerView = () => {
     }
   }, [session]);
 
+  const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
+
   const manufacturerFormHandle = async (
     reqData: ManufacturerData
   ): Promise<void> => {
@@ -84,6 +86,7 @@ const ManufacturerView = () => {
         }),
       });
       const notification = await response.json();
+      setSaveButtonSpinner(false);
       await mutate(['/api/getSingleDbData', router.query.id, 'Manufacturer']);
       if (notification.message.includes('error')) {
         toast.error(notification.message);
@@ -91,6 +94,7 @@ const ManufacturerView = () => {
         toast.success(notification.message);
       }
     } catch (e) {
+      setSaveButtonSpinner(false);
       console.log((e as Error).message);
       toast.error(`An unexpected error has occured: ${error}`);
     }
@@ -105,6 +109,8 @@ const ManufacturerView = () => {
             <ManufacturerProfile
               formManufacturerData={data}
               formHandle={manufacturerFormHandle}
+              spinnerFunction={setSaveButtonSpinner}
+              spinnerState={saveButtonSpinner}
             />
           )}
         </div>

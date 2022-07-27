@@ -2,10 +2,11 @@ import React, { FC, useState, useRef, useEffect } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Manufacturer as ManufacturerData } from '../data/seedData';
 import { Car as CarData } from '../data/seedData';
+import { byPropertiesOf } from '../utils/sort';
 import Image from 'next/image';
 import RedXIcon from '../public/icons/red-x.svg';
 import uploadImages from '../utils/uploadImages';
-import { byPropertiesOf } from '../utils/sort';
+import SpinnerButton from '../public/icons/spinnerButton.svg';
 
 interface formManufacturerPropValues extends ManufacturerData {
   _id: string;
@@ -32,12 +33,16 @@ type Props = {
     featuredImage,
     imageGallery,
   }: CarData): Promise<void>;
+  spinnerFunction: React.Dispatch<React.SetStateAction<boolean>>;
+  spinnerState: boolean;
 };
 
 const CarProfile: FC<Props> = ({
   formCarData,
   formManufacturersData,
   formHandle,
+  spinnerFunction,
+  spinnerState,
 }: Props) => {
   const {
     register,
@@ -53,6 +58,7 @@ const CarProfile: FC<Props> = ({
   const [imageGalleryPlaceholder, setImageGalleryPlaceholder] = useState<
     Array<string>
   >([]);
+
   const [imagePreviews, setImagePreviews] = useState<Array<string>>([]);
 
   const featuredImageFile = useRef<HTMLInputElement | null>(null);
@@ -83,7 +89,7 @@ const CarProfile: FC<Props> = ({
 
   const onSubmit: SubmitHandler<CarData> = async (data: CarData, e) => {
     e!.preventDefault();
-
+    spinnerFunction(true);
     const formData = new FormData();
     if (!data.featuredImage && !data.imageGallery) {
       formHandle(data);
@@ -538,9 +544,24 @@ const CarProfile: FC<Props> = ({
           <span role="alert">{errors.imageGallery.message}</span>
         )}
         <div className="flex justify-center">
-          <button type="submit" className="w-full lg:w-3/6">
-            Save
-          </button>
+          {!spinnerState ? (
+            <button type="submit" className="w-full md:w-3/6">
+              Save
+            </button>
+          ) : (
+            <button type="submit" className="w-full md:w-3/6">
+              <div className="flex flex-row justify-center space-x-2 items-center">
+                <Image
+                  className="animate-spin"
+                  src={SpinnerButton}
+                  alt="Loading spinner for placing order"
+                  width="20px"
+                  height="20px"
+                />
+                <p>Save</p>
+              </div>
+            </button>
+          )}
         </div>
       </form>
     </div>
