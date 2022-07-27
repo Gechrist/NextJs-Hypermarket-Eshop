@@ -52,7 +52,7 @@ const EmblaCarousel = ({ sections, car }: any) => {
                 key={index}
               >
                 <div
-                  className="w-72 h-72 cursor-pointer"
+                  className="h-72 bg-black cursor-pointer"
                   onClick={() => openModal(item, car)}
                 >
                   <Image
