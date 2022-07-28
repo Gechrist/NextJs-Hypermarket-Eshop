@@ -137,7 +137,7 @@ const UserView = () => {
             </div>
           )}
           {orders && (
-            <div className="w-3/6 rounded bg-white text-black py-4 ">
+            <div className="w-3/6 h-96 rounded bg-white text-black py-4 overflow-y-scroll">
               {data?.orders?.length > 0 ? (
                 <table className="table-auto w-full">
                   <thead className="w-full border-b-2 border-grey-400">
@@ -147,7 +147,7 @@ const UserView = () => {
                       <th>Date</th>
                     </tr>
                   </thead>
-                  <tbody className="overflow-y-scroll">
+                  <tbody>
                     {data.orders.map((item: any, index: number) => (
                       <tr
                         className="text-center text-black bg-white border-b-2 border-grey-400"

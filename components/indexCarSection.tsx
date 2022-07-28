@@ -50,8 +50,8 @@ const IndexCarSection: FC<Props> = ({ car }: Props) => {
         <div className="flex flex-col w-full md:w-3/6">
           {car.featuredImage && (
             <div className="relative block md:justify-end w-full h-72 md:h-full">
-              <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 top-0 bg-gradient-to-b from-gray-900" />
-              <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 bottom-0 bg-gradient-to-t from-gray-900" />
+              <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 -top-0.5 bg-gradient-to-b from-gray-900" />
+              <div className="absolute border-0 w-full h-2/6 md:h-1/6 z-50 -bottom-0.5 bg-gradient-to-t from-gray-900" />
               <Image
                 src={car.featuredImage}
                 alt={`${car.model} image`}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import IndexCarSection from './indexCarSection';
 import { PrevButton, NextButton } from '../utils/emblaCarouselButtons';
+import IndexCarSection from './indexCarSection';
 import useEmblaCarousel from 'embla-carousel-react';
 
 const EmblaCarousel = ({ sections }: any) => {
   const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState<boolean>(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState<boolean>(false);
 
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);

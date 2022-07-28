@@ -112,7 +112,7 @@ const Menu = () => {
                   >
                     Home
                   </div>
-                  <div className="w-full bg-white text-black divide-y-2 divide-grey-400 overflow-y-auto h-96 scrollbar-hide border-b-2 border-t-2 border-grey-400">
+                  <div className="w-full bg-white text-black divide-y-2 divide-grey-400 overflow-y-auto md:h-96 h-5/6 scrollbar-hide border-b-2 border-t-2 border-grey-400">
                     {manufacturers?.length > 0 &&
                       manufacturers
                         .sort(byPropertiesOf<SortingProperties>(['brand']))
