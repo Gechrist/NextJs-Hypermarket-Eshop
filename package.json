@@ -1,5 +1,7 @@
 {
   "name": "ecommerce-nextjs",
+  "version": "1.0.0",
+  "license": "(ISC OR GPL-3.0)",
   "private": true,
   "scripts": {
     "dev": "next dev",
