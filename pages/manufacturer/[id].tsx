@@ -55,12 +55,6 @@ const ManufacturerView = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!session?.isAdmin) {
-      router.push('/login');
-    }
-  }, [session]);
-
   const [saveButtonSpinner, setSaveButtonSpinner] = useState<boolean>(false);
 
   const manufacturerFormHandle = async (
