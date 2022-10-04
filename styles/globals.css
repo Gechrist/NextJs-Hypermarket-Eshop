@@ -4,19 +4,13 @@
 
 @layer base {
   html {
-    @apply font-body;
-    @apply bg-gray-900;
-    @apply text-white;
-    @apply text-xs;
-    @apply xl:text-base;
-    @apply 2xl:text-xl;
+    @apply font-body bg-gray-900 text-white text-xs xl:text-base 2xl:text-xl;
   }
   body {
     @apply overflow-x-hidden;
   }
   h1 {
-    @apply text-4xl;
-    @apply font-title;
+    @apply text-4xl font-title;
   }
   h2 {
     @apply text-2xl;
