@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import formatter from '../utils/prices';
 import { byPropertiesOf } from '../utils/sort';
 import Link from 'next/link';
@@ -30,11 +30,11 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
   const [modalName, setModalName] = useState<string>('');
 
   //assign data to table
-  useEffect(() => {
+  useMemo(() => {
     setTableData([...data]);
   }, [data]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (data.length > itemsPerPage) {
       setPagination(true);
       pagesFunction();
@@ -52,7 +52,7 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
     }
   }, [data]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (nothingFoundSearchMessage) {
       toast.info('No results found');
     }
