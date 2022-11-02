@@ -37,7 +37,13 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
   useMemo(() => {
     if (data.length > itemsPerPage) {
       setPagination(true);
-      pagesFunction();
+      if (data!.length % itemsPerPage === 0) {
+        setPages((pages) => (pages = data!.length / itemsPerPage));
+      } else {
+        setPages(
+          (pages) => (pages = Math.floor(data!.length / itemsPerPage) + 1)
+        );
+      }
     } else {
       setPagination(false);
       setPage(1);
@@ -139,14 +145,6 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
     setSortedBy(value);
   };
 
-  const pagesFunction = () => {
-    if (data!.length % itemsPerPage === 0) {
-      setPages(data!.length / itemsPerPage);
-    } else {
-      setPages(Math.floor(data!.length / itemsPerPage) + 1);
-    }
-  };
-
   //Display search results
   const displayData = useMemo(() => {
     if (search && searchData.length === 0) {
@@ -210,23 +208,23 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
         <h2 className="text-center">No Data Available</h2>
       ) : (
         <div>
-          <div className="flex flex-row w-auto">
+          <div className="flex flex-row mb-2 space-x-1 items-center w-auto">
             <Link href={`/create/${type.toLowerCase()}`} passHref>
-              <button className="mb-2">Create New</button>
+              <button>Create New</button>
             </Link>
-            <input
-              className="ml-2 mr-1 shrink-0 text-black w-auto mb-2 rounded grow"
-              type="text"
-              placeholder="  Search..."
-              value={search}
-              onKeyPress={keyPressHandle}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearch(e.target.value)
-              }
-            />
-            {search && (
-              <div className="relative">
-                <div className="block mb-2 right-2 top-3 xl:top-5 absolute h-6 w-8 cursor-pointer">
+            <div className="flex flex-row rounded h-full bg-white grow items-center">
+              <input
+                className="ml-2 mr-1 shrink-0 text-black w-auto py-2 outline-none rounded grow"
+                type="text"
+                placeholder="  Search..."
+                value={search}
+                onKeyPress={keyPressHandle}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearch(e.target.value)
+                }
+              />
+              {search && (
+                <div className="relative h-6 w-8 cursor-pointer">
                   <Image
                     className="px-2"
                     aria-label="Clear Search Results"
@@ -240,10 +238,10 @@ const Table: FC<Props> = ({ type, data, updateData }: Props) => {
                     }}
                   />
                 </div>
-              </div>
-            )}
+              )}
+            </div>
             <button
-              className="mb-2 px-2 rounded-r"
+              className="px-2 rounded-r"
               onClick={() => searchHandle(search)}
             >
               Search
